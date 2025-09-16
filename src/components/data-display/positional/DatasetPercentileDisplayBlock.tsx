@@ -1,20 +1,8 @@
 import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { getPercentile } from "@/services/make-quantile-item.helper";
-import {
-  Grid,
-  Slider,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Grid, Slider, Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
-import {
-  Fragment,
-  memo,
-  useCallback,
-  useMemo,
-  useState,
-  type FC,
-} from "react";
+import { Fragment, memo, useCallback, useMemo, useState, type FC } from "react";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -22,26 +10,25 @@ type Props = {
   orderedDataset: number[];
   fromPopulation: boolean;
 };
-export const DatasetPercentileDisplayBlock: FC<Props> =
-  memo(({ fromPopulation, orderedDataset }) => {
+export const DatasetPercentileDisplayBlock: FC<Props> = memo(
+  ({ fromPopulation, orderedDataset }) => {
     const fmt = useFormatNumber();
     const [p, setP] = useState(1);
 
-    const { value, msg, decimal, left, right } =
-      useMemo(() => {
-        const pValue = getPercentile(orderedDataset, p);
-        if (pValue === undefined) {
-          return { value: undefined, msg: "$-$" };
-        }
+    const { value, msg, decimal, left, right } = useMemo(() => {
+      const pValue = getPercentile(orderedDataset, p);
+      if (pValue === undefined) {
+        return { value: undefined, msg: "$-$" };
+      }
 
-        return {
-          msg: `$${fmt(pValue.value)}$`,
-          decimal: pValue.decimal,
-          value: pValue.value,
-          left: pValue.posLeft,
-          right: pValue.posRight,
-        };
-      }, [fmt, orderedDataset, p]);
+      return {
+        msg: `$${fmt(pValue.value)}$`,
+        decimal: pValue.decimal,
+        value: pValue.value,
+        left: pValue.posLeft,
+        right: pValue.posRight,
+      };
+    }, [fmt, orderedDataset, p]);
 
     const posCalcSteps = useMemo(() => {
       if (value === undefined) {
@@ -75,12 +62,7 @@ export const DatasetPercentileDisplayBlock: FC<Props> =
       const multFmt = fmt(mul, true);
       const step3 = `${vLeftFmt} + ${multFmt}`;
 
-      return [
-        step1,
-        step2,
-        step3,
-        `\\boxed{${fmt(value)}}`,
-      ];
+      return [step1, step2, step3, `\\boxed{${fmt(value)}}`];
     }, [decimal, fmt, left, orderedDataset, right, value]);
 
     const formulaMsg = useMemo(() => {
@@ -89,21 +71,14 @@ export const DatasetPercentileDisplayBlock: FC<Props> =
         : `P_{${p}} = \\frac{${p}}{100}(n + 1)`;
     }, [fromPopulation, p]);
 
-    const handleSliderChange = useCallback(
-      (_: unknown, v: number) => {
-        setP(v);
-      },
-      []
-    );
+    const handleSliderChange = useCallback((_: unknown, v: number) => {
+      setP(v);
+    }, []);
 
     return (
       <CollapsibleCard
         slotTitle={
-          <Grid
-            container
-            spacing={1}
-            sx={{ flexGrow: 1, flexBasis: 0 }}
-          >
+          <Grid container spacing={1} sx={{ flexGrow: 1, flexBasis: 0 }}>
             <Grid size={12}>
               <Typography
                 component="div"
@@ -121,7 +96,7 @@ export const DatasetPercentileDisplayBlock: FC<Props> =
                 <MathJax dynamic>{msg}</MathJax>
               </Typography>
             </Grid>
-            <Grid size={8}>
+            <Grid size={12}>
               <Slider
                 max={99}
                 min={1}
@@ -133,9 +108,7 @@ export const DatasetPercentileDisplayBlock: FC<Props> =
         }
         slotContent={
           <Stack spacing={0.5}>
-            <MathJax dynamic>
-              {`สูตร: $$${formulaMsg}$$`}
-            </MathJax>
+            <MathJax dynamic>{`สูตร: $$${formulaMsg}$$`}</MathJax>
             {value !== undefined && (
               <Fragment>
                 <Typography>{`หาตำแหน่ง:`}</Typography>
@@ -171,4 +144,5 @@ export const DatasetPercentileDisplayBlock: FC<Props> =
         }
       />
     );
-  });
+  }
+);

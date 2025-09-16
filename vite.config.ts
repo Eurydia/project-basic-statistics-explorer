@@ -5,5 +5,5 @@ import tsconfigpath from "vite-tsconfig-paths";
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [react(), tsconfigpath()],
-  base: "/project-algodonite/",
+  base: "/project-basic-statistics-explorer/",
 });
