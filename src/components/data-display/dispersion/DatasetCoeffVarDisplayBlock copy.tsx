@@ -6,11 +6,10 @@ import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetCoeffVarDisplayBlock: FC<{
   dataset: number[];
   fromPopulation: boolean;
-};
-export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
+}> = memo(
   ({ dataset, fromPopulation }) => {
     const formulaMsg = useMemo(() => {
       return !fromPopulation

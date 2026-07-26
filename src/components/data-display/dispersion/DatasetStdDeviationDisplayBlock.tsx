@@ -6,11 +6,10 @@ import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetStdDeviationDisplayBlock: FC<{
   dataset: number[];
   fromPopulation: boolean;
-};
-export const DatasetStdDeviationDisplayBlock: FC<Props> = memo(
+}> = memo(
   ({ dataset, fromPopulation }) => {
     const { value, msg } = useMemo(() => {
       const dtMean = mean(dataset);

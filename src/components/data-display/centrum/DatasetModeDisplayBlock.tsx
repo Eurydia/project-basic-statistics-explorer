@@ -6,10 +6,9 @@ import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetModeDisplayBlock: FC<{
   dataset: number[];
-};
-export const DatasetModeDisplayBlock: FC<Props> = memo(({ dataset }) => {
+}> = memo(({ dataset }) => {
   const { value, msg, counter } = useMemo(() => {
     const counter: Record<number, number> = {};
     for (const dt of dataset) {

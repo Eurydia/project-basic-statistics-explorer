@@ -8,11 +8,10 @@ import {
 } from "@mui/material";
 import { type ChangeEvent, type FC, memo, useCallback } from "react";
 
-type Props = {
+export const DatasetOriginInput: FC<{
   value: string;
   onChange: (v: string) => unknown;
-};
-export const DatasetOriginInput: FC<Props> = memo(({ onChange, value }) => {
+}> = memo(({ onChange, value }) => {
   const handleChange = useCallback(
     ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange(value),
     [onChange],

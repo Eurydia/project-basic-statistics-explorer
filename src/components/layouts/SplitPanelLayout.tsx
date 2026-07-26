@@ -1,11 +1,10 @@
 import { Grid } from "@mui/material";
 import { type FC, memo, type ReactNode } from "react";
 
-type Props = {
+export const SplitPanelLayout: FC<{
   left: ReactNode;
   right: ReactNode;
-};
-export const SplitPanelLayout: FC<Props> = memo(({ left, right }) => {
+}> = memo(({ left, right }) => {
   return (
     <Grid
       container

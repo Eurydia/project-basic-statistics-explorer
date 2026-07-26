@@ -5,11 +5,10 @@ import { type FC, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 
-type Props = {
+export const DatasetVarianceDisplayBlock: FC<{
   dataset: number[];
   fromPopulation: boolean;
-};
-export const DatasetVarianceDisplayBlock: FC<Props> = memo(
+}> = memo(
   ({ dataset, fromPopulation }) => {
     const { msg } = useMemo(() => {
       const dtMean = mean(dataset);

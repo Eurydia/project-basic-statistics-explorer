@@ -6,11 +6,10 @@ import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetQ2DisplayBlock: FC<{
   orderedDataset: number[];
   fromPopulation: boolean;
-};
-export const DatasetQ2DisplayBlock: FC<Props> = memo(
+}> = memo(
   ({ orderedDataset, fromPopulation }) => {
     const { value, msg, decimal, left, right } = useMemo(() => {
       const q2 = getQuantile(orderedDataset, 2);

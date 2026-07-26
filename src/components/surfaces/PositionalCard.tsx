@@ -10,11 +10,10 @@ import { DatasetQ3DisplayBlock } from "../data-display/positional/DatasetQ3Displ
 import { DatasetWhiskerMaxDisplayBlock } from "../data-display/positional/DatasetWhiskerMaxDisplayBlock";
 import { DatasetWhiskerMinDisplayBlock } from "../data-display/positional/DatasetWhiskerMinDisplayBlock";
 
-type Props = {
+export const PositionalCard: FC<{
   dataset: number[];
   fromPopulation: boolean;
-};
-export const PositionalCard: FC<Props> = memo(({ dataset, fromPopulation }) => {
+}> = memo(({ dataset, fromPopulation }) => {
   const orderedDataset = useMemo(() => {
     return structuredClone(dataset).sort((a, b) => a - b);
   }, [dataset]);

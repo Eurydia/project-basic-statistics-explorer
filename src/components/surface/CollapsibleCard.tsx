@@ -1,11 +1,10 @@
 import { Collapse, Paper, Stack, Typography } from "@mui/material";
 import { type FC, memo, type ReactNode, useCallback, useState } from "react";
 
-type Props = {
+export const CollapsibleCard: FC<{
   slotTitle: ReactNode;
   slotContent: ReactNode;
-};
-export const CollapsibleCard: FC<Props> = memo(({ slotContent, slotTitle }) => {
+}> = memo(({ slotContent, slotTitle }) => {
   const [open, setOpen] = useState(false);
   const handleOpenToggle = useCallback(() => {
     setOpen((prev) => !prev);

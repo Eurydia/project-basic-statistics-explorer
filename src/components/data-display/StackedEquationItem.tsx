@@ -2,8 +2,10 @@ import { Box, lighten, useTheme } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { type FC, memo } from "react";
 
-type Props = { latex: string; isLast?: boolean };
-export const StackedEquationItem: FC<Props> = memo(({ latex, isLast }) => {
+export const StackedEquationItem: FC<{
+  latex: string;
+  isLast?: boolean;
+}> = memo(({ latex, isLast }) => {
   const {
     palette: {
       primary: { light, dark },

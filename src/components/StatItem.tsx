@@ -2,13 +2,12 @@ import { Collapse, Stack, Typography } from "@mui/material";
 import { type FC, memo, useCallback, useMemo, useState } from "react";
 import { MathBlock } from "./data-display/MathBlock";
 
-type Props = {
+export const StatItem: FC<{
   label: string;
   expr?: string;
   value?: number | string;
   exprExt?: string;
-};
-export const StatItem: FC<Props> = memo(({ label, expr, value, exprExt }) => {
+}> = memo(({ label, expr, value, exprExt }) => {
   const [showExpr, setShowExpr] = useState(false);
 
   const valueMsg = useMemo(() => {

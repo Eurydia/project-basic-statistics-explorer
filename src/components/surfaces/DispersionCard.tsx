@@ -6,11 +6,10 @@ import { DatasetRangeDisplayBlock } from "../data-display/dispersion/DatasetRang
 import { DatasetStdDeviationDisplayBlock } from "../data-display/dispersion/DatasetStdDeviationDisplayBlock";
 import { DatasetVarianceDisplayBlock } from "../data-display/dispersion/DatasetVarianceDisplayBlock";
 
-type Props = {
+export const DispersionCard: FC<{
   dataset: number[];
   fromPopulation: boolean;
-};
-export const DispersionCard: FC<Props> = memo(({ dataset, fromPopulation }) => {
+}> = memo(({ dataset, fromPopulation }) => {
   return (
     <Paper elevation={4} sx={{ padding: 2 }}>
       <Stack spacing={1}>

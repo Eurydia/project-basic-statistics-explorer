@@ -6,10 +6,9 @@ import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetIQRDisplayBlock: FC<{
   dataset: number[];
-};
-export const DatasetIQRDisplayBlock: FC<Props> = memo(({ dataset }) => {
+}> = memo(({ dataset }) => {
   const { value, msg, q1, q3 } = useMemo(() => {
     if (dataset.length < 2) {
       return { value: undefined, msg: "$-$" };

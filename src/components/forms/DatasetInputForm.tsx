@@ -4,10 +4,9 @@ import { DatasetOriginInput } from "@/components/form-input/DatasetOriginInput";
 import { DatasetSourceDisplay } from "../data-display/DatasetDisplay";
 import { DatasetSourceInput } from "../form-input/DatasetSourceInput";
 
-type Props = {
+export const DatasetInputForm: FC<{
   onSubmit: (value: { fromPopulation: boolean; dataset: number[] }) => unknown;
-};
-export const DatasetInputForm: FC<Props> = memo(({ onSubmit }) => {
+}> = memo(({ onSubmit }) => {
   const [datasetRaw, setDatasetRaw] = useState("");
   const [datasetOrigin, setDatasetOrigin] = useState("0");
 

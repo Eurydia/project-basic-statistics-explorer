@@ -1,9 +1,8 @@
 import { MathJax } from "better-react-mathjax";
 import { type FC, memo } from "react";
 
-type Props = {
+export const MathBlock: FC<{
   expr: string;
-};
-export const MathBlock: FC<Props> = memo(({ expr }) => {
+}> = memo(({ expr }) => {
   return <MathJax dynamic>{expr.normalize("NFC")}</MathJax>;
 });

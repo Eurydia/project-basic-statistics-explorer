@@ -1,11 +1,10 @@
 import { OutlinedInput } from "@mui/material";
 import { type ChangeEvent, type FC, memo, useCallback } from "react";
 
-type Props = {
+export const DatasetSourceInput: FC<{
   value: string;
   onChange: (v: string) => unknown;
-};
-export const DatasetSourceInput: FC<Props> = memo(({ value, onChange }) => {
+}> = memo(({ value, onChange }) => {
   const handleChange = useCallback(
     ({
       target: { value },

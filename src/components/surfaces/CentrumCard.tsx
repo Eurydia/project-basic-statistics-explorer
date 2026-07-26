@@ -4,11 +4,10 @@ import { DatasetMeanDisplayBlock } from "../data-display/centrum/DatasetMeanDisp
 import { DatasetMedianDisplayBlock } from "../data-display/centrum/DatasetMedianDisplayBlock";
 import { DatasetModeDisplayBlock } from "../data-display/centrum/DatasetModeDisplayBlock";
 
-type Props = {
+export const CentrumCard: FC<{
   fromPopulation: boolean;
   dataset: number[];
-};
-export const CentrumCard: FC<Props> = memo(({ dataset, fromPopulation }) => {
+}> = memo(({ dataset, fromPopulation }) => {
   return (
     <Paper elevation={4} sx={{ padding: 2 }}>
       <Stack spacing={1}>

@@ -3,7 +3,7 @@ import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
 import { max, min } from "d3-array";
 import { type FC, memo, useEffect, useRef } from "react";
 
-type BoxPlotProps = {
+export const BoxPlot: FC<{
   data?: {
     q1: number;
     median: number;
@@ -12,8 +12,7 @@ type BoxPlotProps = {
     whiskerMax: number;
     items: number[];
   };
-};
-export const BoxPlot: FC<BoxPlotProps> = memo(({ data }) => {
+}> = memo(({ data }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const chartRef = useRef<BoxPlotChart | null>(null);
   const {
