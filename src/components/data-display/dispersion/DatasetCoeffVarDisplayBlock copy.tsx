@@ -1,8 +1,8 @@
-import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { mean } from "d3-array";
-import { Fragment, memo, useMemo, type FC } from "react";
+import { type FC, Fragment, memo, useMemo } from "react";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -26,9 +26,7 @@ export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
         return { value: undefined, msg: "$-$" };
       }
 
-      const size = fromPopulation
-        ? dataset.length
-        : dataset.length - 1;
+      const size = fromPopulation ? dataset.length : dataset.length - 1;
 
       if (size === 0) {
         return { value: undefined, msg: "$-$" };
@@ -75,17 +73,13 @@ export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>
-              {`สัมประสิทธิ์ของการแปรผัน:`}
-            </Typography>
+            <Typography fontWeight={700}>{`สัมประสิทธิ์ของการแปรผัน:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }
         slotContent={
           <Stack spacing={0.5}>
-            <MathJax dynamic>
-              {`สูตร: $$${formulaMsg}$$`}
-            </MathJax>
+            <MathJax dynamic>{`สูตร: $$${formulaMsg}$$`}</MathJax>
             {value !== undefined && (
               <Fragment>
                 <Typography>{`ขั้นตอนการคำนวณ:`}</Typography>
@@ -102,5 +96,5 @@ export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
         }
       />
     );
-  }
+  },
 );

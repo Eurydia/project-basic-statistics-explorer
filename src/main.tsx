@@ -6,7 +6,12 @@ import { App } from "./App";
 import "./main.css";
 import { theme } from "./theme";
 
-createRoot(document.getElementById("root")!).render(
+const root = document.getElementById("root");
+
+if (root === null) {
+  throw Error("missing root element");
+}
+createRoot(root).render(
   <StrictMode>
     <MathJaxContext
       renderMode="post"
@@ -24,5 +29,5 @@ createRoot(document.getElementById("root")!).render(
         <App />
       </ThemeProvider>
     </MathJaxContext>
-  </StrictMode>
+  </StrictMode>,
 );

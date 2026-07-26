@@ -1,8 +1,8 @@
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getQuantile } from "@/services/make-quantile-item.helper";
 import { Paper, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
-import { memo, useMemo, type FC } from "react";
+import { type FC, memo, useMemo } from "react";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { getQuantile } from "@/services/make-quantile-item.helper";
 
 type Props = {
   orderedDataset: number[];
@@ -24,18 +24,12 @@ export const DatasetOutlierDisplayBlock: FC<Props> = memo(
         .filter((dt) => dt < vMin || dt > vMax)
         .map((v) => fmt(v));
       return {
-        msg:
-          v.length === 0
-            ? "ไม่พบค่านอกเกณฑ์"
-            : `$${v.join(",")}$`,
+        msg: v.length === 0 ? "ไม่พบค่านอกเกณฑ์" : `$${v.join(",")}$`,
       };
     }, [fmt, orderedDataset]);
 
     return (
-      <Paper
-        variant="outlined"
-        sx={{ padding: 2 }}
-      >
+      <Paper variant="outlined" sx={{ padding: 2 }}>
         <Typography
           component="div"
           sx={{
@@ -46,12 +40,10 @@ export const DatasetOutlierDisplayBlock: FC<Props> = memo(
             alignItems: "baseline",
           }}
         >
-          <Typography fontWeight={700}>
-            {`ค่านอกเกณฑ์:`}
-          </Typography>
+          <Typography fontWeight={700}>{`ค่านอกเกณฑ์:`}</Typography>
           <MathJax dynamic>{`${msg}`}</MathJax>
         </Typography>
       </Paper>
     );
-  }
+  },
 );

@@ -1,7 +1,4 @@
-export const getQuantile = (
-  orderedDataset: number[],
-  r: number
-) => {
+export const getQuantile = (orderedDataset: number[], r: number) => {
   if (orderedDataset.length < 4) {
     return undefined;
   }
@@ -15,15 +12,11 @@ export const getQuantile = (
 
   const valueLeft = orderedDataset[posLeft];
   const valueRight = orderedDataset[posRight];
-  const value =
-    valueLeft + decimal * Math.abs(valueLeft - valueRight);
+  const value = valueLeft + decimal * Math.abs(valueLeft - valueRight);
   return { value, posLeft, posRight, decimal };
 };
 
-export const getPercentile = (
-  orderedDataset: number[],
-  r: number
-) => {
+export const getPercentile = (orderedDataset: number[], r: number) => {
   if (orderedDataset.length < 2) {
     return undefined;
   }
@@ -37,7 +30,6 @@ export const getPercentile = (
 
   const valueLeft = orderedDataset[posLeft];
   const valueRight = orderedDataset[posRight];
-  const value =
-    valueLeft + decimal * Math.abs(valueLeft - valueRight);
+  const value = valueLeft + decimal * Math.abs(valueLeft - valueRight);
   return { value, posLeft, posRight, decimal };
 };

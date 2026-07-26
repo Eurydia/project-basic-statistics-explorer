@@ -1,8 +1,8 @@
-import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { mean, sum } from "d3-array";
-import { Fragment, memo, useMemo, type FC } from "react";
+import { type FC, Fragment, memo, useMemo } from "react";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -40,9 +40,7 @@ export const DatasetMeanDisplayBlock: FC<Props> = memo(
         return [];
       }
       const datasetExpandedSum = dataset
-        .map((dt) =>
-          dt < 0 ? `\\left(${fmt(dt)}\\right)` : fmt(dt)
-        )
+        .map((dt) => (dt < 0 ? `\\left(${fmt(dt)}\\right)` : fmt(dt)))
         .join("+");
 
       const datasetSize = fmt(dataset.length);
@@ -67,17 +65,13 @@ export const DatasetMeanDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>
-              {`ค่าเฉลี่ย:`}
-            </Typography>
+            <Typography fontWeight={700}>{`ค่าเฉลี่ย:`}</Typography>
             <MathJax dynamic>{result.msg}</MathJax>
           </Typography>
         }
         slotContent={
           <Stack spacing={0.5}>
-            <MathJax dynamic>
-              {`สูตร:  $$${formulaBaseMsg}$$`}
-            </MathJax>
+            <MathJax dynamic>{`สูตร:  $$${formulaBaseMsg}$$`}</MathJax>
             {result.value !== undefined && (
               <Fragment>
                 <Typography>{`ขั้นตอนการคำนวณ:`}</Typography>
@@ -94,5 +88,5 @@ export const DatasetMeanDisplayBlock: FC<Props> = memo(
         }
       />
     );
-  }
+  },
 );

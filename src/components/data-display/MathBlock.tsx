@@ -1,5 +1,5 @@
 import { MathJax } from "better-react-mathjax";
-import { memo, type FC } from "react";
+import { type FC, memo } from "react";
 
 type Props = {
   expr: string;

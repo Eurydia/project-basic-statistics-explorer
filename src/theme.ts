@@ -15,7 +15,7 @@ export const theme = createTheme({
     primary: blue,
     secondary: orange,
     background: {
-      default: blue["A100"],
+      default: blue.A100,
       paper: "#fff",
     },
     text: { primary: blue[900] },

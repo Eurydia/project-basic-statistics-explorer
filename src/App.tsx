@@ -1,11 +1,11 @@
 import { Paper, Stack } from "@mui/material";
-import { useState, type FC } from "react";
+import { type FC, useState } from "react";
 import { Attribution } from "./components/blogs/Attribution";
-import { CentrumCard } from "./components/card/CentrumCard";
-import { DispersionCard } from "./components/card/DispersionCard";
-import { PositionalCard } from "./components/card/PositionalCard";
 import { DatasetInputForm } from "./components/forms/DatasetInputForm";
-import { SplitPanelLayout } from "./layouts/SplitPanelLayout";
+import { SplitPanelLayout } from "./components/layouts/SplitPanelLayout";
+import { CentrumCard } from "./components/surfaces/CentrumCard";
+import { DispersionCard } from "./components/surfaces/DispersionCard";
+import { PositionalCard } from "./components/surfaces/PositionalCard";
 
 export const App: FC = () => {
   const [data, setData] = useState<{
@@ -34,11 +34,7 @@ export const App: FC = () => {
           <CentrumCard {...data} />
           <DispersionCard {...data} />
           <PositionalCard {...data} />
-          <Paper
-            variant="elevation"
-            sx={{ padding: 2 }}
-            elevation={4}
-          >
+          <Paper variant="elevation" sx={{ padding: 2 }} elevation={4}>
             <Attribution />
           </Paper>
         </Stack>

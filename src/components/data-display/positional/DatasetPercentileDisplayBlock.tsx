@@ -1,8 +1,8 @@
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getPercentile } from "@/services/make-quantile-item.helper";
 import { Grid, Slider, Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
-import { Fragment, memo, useCallback, useMemo, useState, type FC } from "react";
+import { type FC, Fragment, memo, useCallback, useMemo, useState } from "react";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { getPercentile } from "@/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -90,9 +90,7 @@ export const DatasetPercentileDisplayBlock: FC<Props> = memo(
                   alignItems: "baseline",
                 }}
               >
-                <Typography fontWeight={700}>
-                  {`เปอร์เซ็นไทล์ ${p}:`}
-                </Typography>
+                <Typography fontWeight={700}>{`เปอร์เซ็นไทล์ ${p}:`}</Typography>
                 <MathJax dynamic>{msg}</MathJax>
               </Typography>
             </Grid>
@@ -125,7 +123,7 @@ export const DatasetPercentileDisplayBlock: FC<Props> = memo(
                     .map((dt, index) =>
                       index === left || index === right
                         ? `\\underline{${fmt(dt)}}`
-                        : fmt(dt)
+                        : fmt(dt),
                     )
                     .join(",")}$$`}
                 />
@@ -144,5 +142,5 @@ export const DatasetPercentileDisplayBlock: FC<Props> = memo(
         }
       />
     );
-  }
+  },
 );

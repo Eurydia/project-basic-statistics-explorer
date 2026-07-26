@@ -1,16 +1,16 @@
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getQuantile } from "@/services/make-quantile-item.helper";
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
-import { Fragment, memo, useMemo, type FC } from "react";
+import { type FC, Fragment, memo, useMemo } from "react";
+import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { getQuantile } from "@/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
 type Props = {
   orderedDataset: number[];
 };
-export const DatasetWhiskerMaxDisplayBlock: FC<Props> =
-  memo(({ orderedDataset }) => {
+export const DatasetWhiskerMaxDisplayBlock: FC<Props> = memo(
+  ({ orderedDataset }) => {
     const fmt = useFormatNumber();
 
     const { value, msg, q1, q3 } = useMemo(() => {
@@ -85,4 +85,5 @@ export const DatasetWhiskerMaxDisplayBlock: FC<Props> =
         }
       />
     );
-  });
+  },
+);

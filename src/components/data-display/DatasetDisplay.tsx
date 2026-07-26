@@ -1,12 +1,6 @@
+import { Alert, AlertTitle, Paper, Stack, Typography } from "@mui/material";
+import { type FC, memo, useMemo } from "react";
 import { useFormatNumber } from "@/hooks/useFormatNumber";
-import {
-  Alert,
-  AlertTitle,
-  Paper,
-  Stack,
-  Typography,
-} from "@mui/material";
-import { memo, useMemo, type FC } from "react";
 import { MathBlock } from "./MathBlock";
 
 type Props = {
@@ -19,9 +13,7 @@ export const DatasetSourceDisplay: FC<Props> = memo(
     const fmt = useFormatNumber();
     const sizeMsg = useMemo(() => {
       const size = fmt(dataset.length);
-      return datasetFromPopulation
-        ? `(N=${size})`
-        : `(n=${size})`;
+      return datasetFromPopulation ? `(N=${size})` : `(n=${size})`;
     }, [dataset.length, datasetFromPopulation, fmt]);
 
     const parsedDataset = useMemo(() => {
@@ -30,9 +22,7 @@ export const DatasetSourceDisplay: FC<Props> = memo(
 
     return (
       <Stack spacing={1}>
-        <MathBlock
-          expr={`ข้อมูลที่จะถูกใช้ $${sizeMsg}$`}
-        />
+        <MathBlock expr={`ข้อมูลที่จะถูกใช้ $${sizeMsg}$`} />
         <Paper
           variant="outlined"
           sx={{
@@ -61,5 +51,5 @@ export const DatasetSourceDisplay: FC<Props> = memo(
         )}
       </Stack>
     );
-  }
+  },
 );
