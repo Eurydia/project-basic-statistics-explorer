@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { extent } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -10,8 +10,6 @@ type Props = {
   dataset: number[];
 };
 export const DatasetRangeDisplayBlock: FC<Props> = memo(({ dataset }) => {
-  const fmt = useFormatNumber();
-
   const { value, msg } = useMemo(() => {
     if (dataset.length < 2) {
       return { value: undefined, msg: "$-$" };
@@ -23,9 +21,9 @@ export const DatasetRangeDisplayBlock: FC<Props> = memo(({ dataset }) => {
     const value = vMax - vMin;
     return {
       value,
-      msg: `${fmt(value)}`,
+      msg: `${formatNumberParentheses(value)}`,
     };
-  }, [dataset, fmt]);
+  }, [dataset]);
 
   const calcSteps = useMemo(() => {
     if (value === undefined) {
@@ -39,20 +37,20 @@ export const DatasetRangeDisplayBlock: FC<Props> = memo(({ dataset }) => {
     const fmtDataset = orderedDataset
       .map((dt, index) =>
         index === 0 || index === orderedDataset.length - 1
-          ? `\\underline{${fmt(dt)}}`
-          : fmt(dt),
+          ? `\\underline{${formatNumberParentheses(dt)}}`
+          : formatNumberParentheses(dt),
       )
       .join(",");
 
-    const vMinFmt = fmt(vMin, true);
-    const vMaxFmt = fmt(vMax, true);
+    const vMinFmt = formatNumberParentheses(vMin, true);
+    const vMaxFmt = formatNumberParentheses(vMax, true);
 
     return [
       `${fmtDataset}`,
       `${vMaxFmt} - ${vMinFmt}`,
-      `\\boxed{${fmt(value)}}`,
+      `\\boxed{${formatNumberParentheses(value)}}`,
     ];
-  }, [dataset, fmt, value]);
+  }, [dataset, value]);
 
   return (
     <CollapsibleCard

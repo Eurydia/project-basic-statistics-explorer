@@ -2,28 +2,24 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { median } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
-type Props = {
+export const DatasetMedianDisplayBlock: FC<{
   dataset: number[];
-};
-
-export const DatasetMedianDisplayBlock: FC<Props> = memo(({ dataset }) => {
-  const fmt = useFormatNumber();
-
+}> = memo(({ dataset }) => {
   const { value, msg } = useMemo(() => {
     let msg = "$-$";
     const value = median(dataset);
     if (value !== undefined) {
-      msg = `$${fmt(value)}$`;
+      msg = `$${formatNumberParentheses(value)}$`;
     }
     return {
       value,
       msg,
     };
-  }, [dataset, fmt]);
+  }, [dataset]);
 
   const calcSteps = useMemo(() => {
     if (value === undefined) {
@@ -38,27 +34,32 @@ export const DatasetMedianDisplayBlock: FC<Props> = memo(({ dataset }) => {
 
     const orderedDatasetExpanded = orderedDataset
       .map((dt, index) =>
-        centerPoints.has(index) ? `\\underline{${fmt(dt)}}` : fmt(dt),
+        centerPoints.has(index)
+          ? `\\underline{${formatNumberParentheses(dt)}}`
+          : formatNumberParentheses(dt),
       )
       .join(",");
 
     if (centerPoints.size === 1) {
-      return [orderedDatasetExpanded, `\\boxed{${fmt(value)}}`];
+      return [
+        orderedDatasetExpanded,
+        `\\boxed{${formatNumberParentheses(value)}}`,
+      ];
     }
     const vLeft = orderedDataset[left];
     const vRight = orderedDataset[right];
 
-    const vLeftFmt = fmt(vLeft, true);
-    const vRightFmt = fmt(vRight, true);
+    const vLeftFmt = formatNumberParentheses(vLeft, true);
+    const vRightFmt = formatNumberParentheses(vRight, true);
     const midSum = vLeft + vRight;
-    const midSumFmt = fmt(midSum, true);
+    const midSumFmt = formatNumberParentheses(midSum, true);
     return [
       orderedDatasetExpanded,
       `\\frac{${vLeftFmt} + ${vRightFmt}}{2}`,
       `\\frac{${midSumFmt}}{2}`,
-      `\\boxed{${fmt(value)}}`,
+      `\\boxed{${formatNumberParentheses(value)}}`,
     ];
-  }, [dataset, fmt, value]);
+  }, [dataset, value]);
 
   return (
     <CollapsibleCard

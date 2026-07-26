@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { mean } from "d3-array";
 import { type FC, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 
 type Props = {
@@ -11,7 +11,6 @@ type Props = {
 };
 export const DatasetVarianceDisplayBlock: FC<Props> = memo(
   ({ dataset, fromPopulation }) => {
-    const fmt = useFormatNumber();
     const { msg } = useMemo(() => {
       const dtMean = mean(dataset);
       if (dtMean === undefined) {
@@ -30,8 +29,8 @@ export const DatasetVarianceDisplayBlock: FC<Props> = memo(
       }
       const value = dtSumSqaureDiff / size;
 
-      return { msg: `$${fmt(value)}$` };
-    }, [dataset, fmt, fromPopulation]);
+      return { msg: `$${formatNumberParentheses(value)}$` };
+    }, [dataset, fromPopulation]);
 
     const formulaMsg = useMemo(() => {
       return fromPopulation
@@ -52,9 +51,7 @@ export const DatasetVarianceDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography
-              sx={{ fontWeigth: 700 }}
-            >{`ค่าความแปรปรวน:`}</Typography>
+            <Typography sx={{ fontWeigth: 700 }}>{`ค่าความแปรปรวน:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }

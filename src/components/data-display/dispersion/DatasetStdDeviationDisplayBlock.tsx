@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { mean, sum } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -12,7 +12,6 @@ type Props = {
 };
 export const DatasetStdDeviationDisplayBlock: FC<Props> = memo(
   ({ dataset, fromPopulation }) => {
-    const fmt = useFormatNumber();
     const { value, msg } = useMemo(() => {
       const dtMean = mean(dataset);
       if (dtMean === undefined) {
@@ -31,8 +30,8 @@ export const DatasetStdDeviationDisplayBlock: FC<Props> = memo(
       }
       const value = Math.sqrt(dtSumSqaureDiff / size);
 
-      return { value, msg: `$${fmt(value)}$` };
-    }, [dataset, fmt, fromPopulation]);
+      return { value, msg: `$${formatNumberParentheses(value)}$` };
+    }, [dataset, fromPopulation]);
 
     const calcSteps = useMemo(() => {
       if (value === undefined) {
@@ -47,32 +46,46 @@ export const DatasetStdDeviationDisplayBlock: FC<Props> = memo(
       const dtDiff = dataset.map((dt) => dt - dtMean);
       const dtDiffSquare = dtDiff.map((dt) => dt * dt);
       const dtDiffSquareSum = sum(dtDiffSquare);
-      const dtMeanFmt = fmt(dtMean, true);
+      const dtMeanFmt = formatNumberParentheses(dtMean, true);
 
       const dtFmt = dataset
-        .map((dt) => `\\left(${fmt(dt, true)} - ${dtMeanFmt}\\right)^{2}`)
+        .map(
+          (dt) =>
+            `\\left(${formatNumberParentheses(dt, true)} - ${dtMeanFmt}\\right)^{2}`,
+        )
         .join("+");
-      const dtDiffFmt = dtDiff.map((dt) => `${fmt(dt, true)}^{2}`).join("+");
-      const dtDiffSquareFmt = dtDiffSquare.map((dt) => fmt(dt)).join("+");
-      const dtDiffSquareSumFmt = fmt(dtDiffSquareSum);
+      const dtDiffFmt = dtDiff
+        .map((dt) => `${formatNumberParentheses(dt, true)}^{2}`)
+        .join("+");
+      const dtDiffSquareFmt = dtDiffSquare
+        .map((dt) => formatNumberParentheses(dt))
+        .join("+");
+      const dtDiffSquareSumFmt = formatNumberParentheses(dtDiffSquareSum);
 
-      const sizeFmt = fmt(size);
+      const sizeFmt = formatNumberParentheses(size);
 
       const step1 = fromPopulation
         ? `\\sqrt{\\frac{1}{${sizeFmt}} \\left( ${dtFmt} \\right) }`
         : `\\sqrt{\\frac{1}{${sizeFmt} - 1} \\left ( ${dtFmt} \\right) }`;
 
       const sizeEq = fromPopulation ? size : size - 1;
-      const sizeEqFmt = fmt(sizeEq);
+      const sizeEqFmt = formatNumberParentheses(sizeEq);
 
       const divRes = dtDiffSquareSum / sizeEq;
-      const divResFmt = fmt(divRes);
+      const divResFmt = formatNumberParentheses(divRes);
       const step2 = `\\sqrt{\\frac{1}{${sizeEqFmt}} \\left( ${dtDiffFmt} \\right) }`;
       const step3 = `\\sqrt{\\frac{1}{${sizeEqFmt}} \\left( ${dtDiffSquareFmt} \\right) }`;
       const step4 = `\\sqrt{\\frac{1}{${sizeEqFmt}} \\left( ${dtDiffSquareSumFmt} \\right) }`;
       const step5 = `\\sqrt{ ${divResFmt} }`;
-      return [step1, step2, step3, step4, step5, `\\boxed{${fmt(value)}}`];
-    }, [dataset, fmt, fromPopulation, value]);
+      return [
+        step1,
+        step2,
+        step3,
+        step4,
+        step5,
+        `\\boxed{${formatNumberParentheses(value)}}`,
+      ];
+    }, [dataset, fromPopulation, value]);
 
     const formulaMsg = useMemo(() => {
       return fromPopulation

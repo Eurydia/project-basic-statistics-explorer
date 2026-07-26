@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getQuantile } from "@/services/make-quantile-item.helper";
+import { formatNumberParentheses } from "@/core/formatter";
+import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -10,7 +10,6 @@ type Props = {
   dataset: number[];
 };
 export const DatasetIQRDisplayBlock: FC<Props> = memo(({ dataset }) => {
-  const fmt = useFormatNumber();
   const { value, msg, q1, q3 } = useMemo(() => {
     if (dataset.length < 2) {
       return { value: undefined, msg: "$-$" };
@@ -24,20 +23,23 @@ export const DatasetIQRDisplayBlock: FC<Props> = memo(({ dataset }) => {
     const value = q3.value - q1.value;
     return {
       value,
-      msg: `$${fmt(value)}$`,
+      msg: `$${formatNumberParentheses(value)}$`,
       q1: q1.value,
       q3: q3.value,
     };
-  }, [dataset, fmt]);
+  }, [dataset]);
 
   const calcSteps = useMemo(() => {
     if (value === undefined) {
       return [];
     }
-    const q1Fmt = fmt(q1, true);
-    const q3Fmt = fmt(q3, true);
-    return [`${q3Fmt} - ${q1Fmt}`, `\\boxed{${fmt(value)}}`];
-  }, [fmt, q1, q3, value]);
+    const q1Fmt = formatNumberParentheses(q1, true);
+    const q3Fmt = formatNumberParentheses(q3, true);
+    return [
+      `${q3Fmt} - ${q1Fmt}`,
+      `\\boxed{${formatNumberParentheses(value)}}`,
+    ];
+  }, [q1, q3, value]);
 
   return (
     <CollapsibleCard

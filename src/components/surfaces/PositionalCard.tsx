@@ -1,6 +1,6 @@
 import { Paper, Stack, Typography } from "@mui/material";
 import { type FC, memo, useMemo } from "react";
-import { getQuantile } from "@/services/make-quantile-item.helper";
+import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { BoxPlot } from "../data-display/BoxPlot";
 import { DatasetOutlierDisplayBlock } from "../data-display/positional/DatasetOutlierDisplayBlock";
 import { DatasetPercentileDisplayBlock } from "../data-display/positional/DatasetPercentileDisplayBlock";

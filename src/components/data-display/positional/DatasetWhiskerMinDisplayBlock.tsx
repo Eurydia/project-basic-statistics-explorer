@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getQuantile } from "@/services/make-quantile-item.helper";
+import { formatNumberParentheses } from "@/core/formatter";
+import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -11,8 +11,6 @@ type Props = {
 };
 export const DatasetWhiskerMinDisplayBlock: FC<Props> = memo(
   ({ orderedDataset }) => {
-    const fmt = useFormatNumber();
-
     const { value, msg, q1, q3 } = useMemo(() => {
       const q1 = getQuantile(orderedDataset, 1);
       const q3 = getQuantile(orderedDataset, 3);
@@ -21,33 +19,33 @@ export const DatasetWhiskerMinDisplayBlock: FC<Props> = memo(
       }
       const value = q1.value - 1.5 * (q3.value - q1.value);
       return {
-        msg: fmt(value, false),
+        msg: formatNumberParentheses(value, false),
         value,
         q1: q1.value,
         q3: q3.value,
       };
-    }, [fmt, orderedDataset]);
+    }, [orderedDataset]);
 
     const calcSteps = useMemo(() => {
       if (value === undefined) {
         return [];
       }
-      const q1Fmt = fmt(q1, true);
-      const q3Fmt = fmt(q3, true);
+      const q1Fmt = formatNumberParentheses(q1, true);
+      const q3Fmt = formatNumberParentheses(q3, true);
 
       const diff = q3 - q1;
-      const diffFmt = fmt(diff);
+      const diffFmt = formatNumberParentheses(diff);
 
       const mult = 1.5 * diff;
-      const multFmt = fmt(mult, true);
+      const multFmt = formatNumberParentheses(mult, true);
 
       return [
         `${q1Fmt} - 1.5\\left (${q3Fmt} - ${q1Fmt} \\right)`,
         `${q1Fmt} - 1.5\\left (${diffFmt} \\right)`,
         `${q1Fmt} - ${multFmt}`,
-        `\\boxed{${fmt(value)}}`,
+        `\\boxed{${formatNumberParentheses(value)}}`,
       ];
-    }, [fmt, q1, q3, value]);
+    }, [q1, q3, value]);
 
     return (
       <CollapsibleCard

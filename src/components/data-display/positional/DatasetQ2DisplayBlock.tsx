@@ -1,8 +1,8 @@
 import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
-import { getQuantile } from "@/services/make-quantile-item.helper";
+import { formatNumberParentheses } from "@/core/formatter";
+import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -12,8 +12,6 @@ type Props = {
 };
 export const DatasetQ2DisplayBlock: FC<Props> = memo(
   ({ orderedDataset, fromPopulation }) => {
-    const fmt = useFormatNumber();
-
     const { value, msg, decimal, left, right } = useMemo(() => {
       const q2 = getQuantile(orderedDataset, 2);
       if (q2 === undefined) {
@@ -21,27 +19,27 @@ export const DatasetQ2DisplayBlock: FC<Props> = memo(
       }
 
       return {
-        msg: `$${fmt(q2.value)}$`,
+        msg: `$${formatNumberParentheses(q2.value)}$`,
         decimal: q2.decimal,
         value: q2.value,
         left: q2.posLeft,
         right: q2.posRight,
       };
-    }, [fmt, orderedDataset]);
+    }, [orderedDataset]);
 
     const posCalcSteps = useMemo(() => {
       if (value === undefined) {
         return [];
       }
       const size = orderedDataset.length;
-      const sizeFmt = fmt(size);
+      const sizeFmt = formatNumberParentheses(size);
       const step1 = `\\frac{2}{4}(${sizeFmt} + 1)`;
-      const step2 = `\\frac{2}{4}(${fmt(size + 1)})`;
+      const step2 = `\\frac{2}{4}(${formatNumberParentheses(size + 1)})`;
       const r2Size = 2 * (size + 1);
-      const step3 = `\\frac{${fmt(r2Size)}}{4}`;
-      const step4 = fmt(r2Size / 4);
+      const step3 = `\\frac{${formatNumberParentheses(r2Size)}}{4}`;
+      const step4 = formatNumberParentheses(r2Size / 4);
       return [step1, step2, step3, step4];
-    }, [fmt, orderedDataset.length, value]);
+    }, [orderedDataset.length, value]);
 
     const calcSteps = useMemo(() => {
       if (value === undefined) {
@@ -50,21 +48,26 @@ export const DatasetQ2DisplayBlock: FC<Props> = memo(
       const vLeft = orderedDataset[left];
       const vRight = orderedDataset[right];
 
-      const vLeftFmt = fmt(vLeft, true);
-      const vRightFmt = fmt(vRight, true);
-      const decFmt = fmt(decimal, true);
+      const vLeftFmt = formatNumberParentheses(vLeft, true);
+      const vRightFmt = formatNumberParentheses(vRight, true);
+      const decFmt = formatNumberParentheses(decimal, true);
       const step1 = `${vLeftFmt} + ${decFmt}\\left( ${vRightFmt} - ${vLeftFmt} \\right)`;
 
       const diff = vRight - vLeft;
-      const diffFmt = fmt(diff);
+      const diffFmt = formatNumberParentheses(diff);
       const step2 = `${vLeftFmt} + ${decFmt}\\left( ${diffFmt} \\right)`;
 
       const mul = diff * decimal;
-      const multFmt = fmt(mul, true);
+      const multFmt = formatNumberParentheses(mul, true);
       const step3 = `${vLeftFmt} + ${multFmt}`;
 
-      return [step1, step2, step3, `\\boxed{${fmt(value)}}`];
-    }, [decimal, fmt, left, orderedDataset, right, value]);
+      return [
+        step1,
+        step2,
+        step3,
+        `\\boxed{${formatNumberParentheses(value)}}`,
+      ];
+    }, [decimal, left, orderedDataset, right, value]);
 
     const formulaMsg = useMemo(() => {
       return fromPopulation
@@ -85,9 +88,7 @@ export const DatasetQ2DisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography
-              sx={{ fontWeigth: 700 }}
-            >{`ควอร์ไทล์ที่ 2:`}</Typography>
+            <Typography sx={{ fontWeigth: 700 }}>{`ควอร์ไทล์ที่ 2:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }
@@ -109,8 +110,8 @@ export const DatasetQ2DisplayBlock: FC<Props> = memo(
                   latex={`$$${orderedDataset
                     .map((dt, index) =>
                       index === left || index === right
-                        ? `\\underline{${fmt(dt)}}`
-                        : fmt(dt),
+                        ? `\\underline{${formatNumberParentheses(dt)}}`
+                        : formatNumberParentheses(dt),
                     )
                     .join(",")}$$`}
                 />

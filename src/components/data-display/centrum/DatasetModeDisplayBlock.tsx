@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { max } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -10,8 +10,6 @@ type Props = {
   dataset: number[];
 };
 export const DatasetModeDisplayBlock: FC<Props> = memo(({ dataset }) => {
-  const fmt = useFormatNumber();
-
   const { value, msg, counter } = useMemo(() => {
     const counter: Record<number, number> = {};
     for (const dt of dataset) {
@@ -35,14 +33,14 @@ export const DatasetModeDisplayBlock: FC<Props> = memo(({ dataset }) => {
     let value: number | undefined;
     if (datasetMode.length === 1) {
       value = datasetMode[0];
-      msg = `$${fmt(value)}$`;
+      msg = `$${formatNumberParentheses(value)}$`;
     }
     return {
       value,
       msg,
       counter,
     };
-  }, [dataset, fmt]);
+  }, [dataset]);
 
   const calcSteps = useMemo(() => {
     if (value === undefined) {
@@ -51,14 +49,17 @@ export const DatasetModeDisplayBlock: FC<Props> = memo(({ dataset }) => {
     const orderedDatasetExpanded = Object.entries(counter)
       .map(([value, freq]) => {
         const arr = new Array(freq);
-        arr.fill(fmt(Number(value)));
+        arr.fill(formatNumberParentheses(Number(value)));
         const arrFmt = arr.join(",");
 
         return freq > 2 ? `\\overbrace{${arrFmt}}^{${freq}}` : arrFmt;
       })
       .join(",");
-    return [orderedDatasetExpanded, `\\boxed{${fmt(value)}}`];
-  }, [counter, fmt, value]);
+    return [
+      orderedDatasetExpanded,
+      `\\boxed{${formatNumberParentheses(value)}}`,
+    ];
+  }, [counter, value]);
 
   return (
     <CollapsibleCard

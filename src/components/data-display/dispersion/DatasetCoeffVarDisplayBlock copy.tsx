@@ -2,7 +2,7 @@ import { Stack, Typography } from "@mui/material";
 import { MathJax } from "better-react-mathjax";
 import { mean } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
-import { useFormatNumber } from "@/hooks/useFormatNumber";
+import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surface/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
@@ -12,8 +12,6 @@ type Props = {
 };
 export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
   ({ dataset, fromPopulation }) => {
-    const fmt = useFormatNumber();
-
     const formulaMsg = useMemo(() => {
       return !fromPopulation
         ? `\\frac{s}{|\\overline{x}|}`
@@ -41,24 +39,24 @@ export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
 
       return {
         value,
-        msg: `$${fmt(value)}$`,
+        msg: `$${formatNumberParentheses(value)}$`,
         dtStdDev,
         dtMean,
       };
-    }, [dataset, fmt, fromPopulation]);
+    }, [dataset, fromPopulation]);
 
     const calcSteps = useMemo(() => {
       if (value === undefined) {
         return [];
       }
 
-      const dtMeanAbsFmt = fmt(Math.abs(dtMean));
-      const dtStdDevFmt = fmt(dtStdDev);
+      const dtMeanAbsFmt = formatNumberParentheses(Math.abs(dtMean));
+      const dtStdDevFmt = formatNumberParentheses(dtStdDev);
       const step1 = `\\frac{${dtStdDevFmt}}{|${dtMean}|}`;
       const step2 = `\\frac{${dtStdDevFmt}}{${dtMeanAbsFmt}}`;
 
-      return [step1, step2, `\\boxed{${fmt(value)}}`];
-    }, [dtMean, dtStdDev, fmt, value]);
+      return [step1, step2, `\\boxed{${formatNumberParentheses(value)}}`];
+    }, [dtMean, dtStdDev, value]);
 
     return (
       <CollapsibleCard
