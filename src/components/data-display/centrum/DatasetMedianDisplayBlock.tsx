@@ -73,7 +73,7 @@ export const DatasetMedianDisplayBlock: FC<Props> = memo(({ dataset }) => {
             alignItems: "baseline",
           }}
         >
-          <Typography fontWeight={700}>{`มัธยฐาน:`}</Typography>
+          <Typography sx={{ fontWeigth: 700 }}>{`มัธยฐาน:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>
         </Typography>
       }

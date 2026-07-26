@@ -65,7 +65,7 @@ export const DatasetMeanDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>{`ค่าเฉลี่ย:`}</Typography>
+            <Typography sx={{ fontWeigth: 700 }}>{`ค่าเฉลี่ย:`}</Typography>
             <MathJax dynamic>{result.msg}</MathJax>
           </Typography>
         }

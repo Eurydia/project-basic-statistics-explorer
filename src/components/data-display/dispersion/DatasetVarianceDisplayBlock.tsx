@@ -52,7 +52,9 @@ export const DatasetVarianceDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>{`ค่าความแปรปรวน:`}</Typography>
+            <Typography
+              sx={{ fontWeigth: 700 }}
+            >{`ค่าความแปรปรวน:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }

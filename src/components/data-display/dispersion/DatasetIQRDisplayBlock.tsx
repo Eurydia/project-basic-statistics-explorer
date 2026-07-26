@@ -52,7 +52,9 @@ export const DatasetIQRDisplayBlock: FC<Props> = memo(({ dataset }) => {
             alignItems: "baseline",
           }}
         >
-          <Typography fontWeight={700}>{`พิสัยระหว่างควอร์ไทล์:`}</Typography>
+          <Typography
+            sx={{ fontWeigth: 700 }}
+          >{`พิสัยระหว่างควอร์ไทล์:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>
         </Typography>
       }

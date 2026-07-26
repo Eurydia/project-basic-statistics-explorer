@@ -40,7 +40,7 @@ export const DatasetOutlierDisplayBlock: FC<Props> = memo(
             alignItems: "baseline",
           }}
         >
-          <Typography fontWeight={700}>{`ค่านอกเกณฑ์:`}</Typography>
+          <Typography sx={{ fontWeigth: 700 }}>{`ค่านอกเกณฑ์:`}</Typography>
           <MathJax dynamic>{`${msg}`}</MathJax>
         </Typography>
       </Paper>

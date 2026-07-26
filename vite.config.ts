@@ -1,9 +1,9 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
-import tsconfigpath from "vite-tsconfig-paths";
 
 // https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(), tsconfigpath()],
+  plugins: [react()],
   base: "/project-basic-statistics-explorer/",
+  resolve: { tsconfigPaths: true },
 });

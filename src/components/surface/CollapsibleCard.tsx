@@ -13,23 +13,24 @@ export const CollapsibleCard: FC<Props> = memo(({ slotContent, slotTitle }) => {
   return (
     <Paper variant="outlined" sx={{ padding: 2 }}>
       <Stack
-        flexDirection="row"
-        flexWrap="wrap"
+        direction={"row"}
         spacing={0.5}
-        useFlexGap
-        justifyContent="space-between"
-        alignItems="baseline"
+        sx={{
+          flexWrap: "wap",
+          alignItems: "baseline",
+          justifyContent: "space-between",
+        }}
       >
         {slotTitle}
         <Typography
           component="div"
           onClick={handleOpenToggle}
           sx={{
-            "&:hover": {
-              textDecorationLine: "underline",
-            },
             cursor: "pointer",
             userSelect: "none",
+            ":hover": {
+              textDecorationLine: "underline",
+            },
           }}
         >
           {open ? "(ซ่อน)" : "(แสดง)"}

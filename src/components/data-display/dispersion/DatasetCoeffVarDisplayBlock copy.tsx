@@ -73,7 +73,9 @@ export const DatasetCoeffVarDisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>{`สัมประสิทธิ์ของการแปรผัน:`}</Typography>
+            <Typography
+              sx={{ fontWeigth: 700 }}
+            >{`สัมประสิทธิ์ของการแปรผัน:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }

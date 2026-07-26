@@ -32,12 +32,11 @@ export const StatItem: FC<Props> = memo(({ label, expr, value, exprExt }) => {
   const handleToggleExpr = useCallback(() => setShowExpr((prev) => !prev), []);
 
   return (
-    <Stack flexWrap="wrap" useFlexGap>
+    <Stack sx={{ flexWrap: "warp" }}>
       <Stack
         spacing={1}
-        useFlexGap
-        flexDirection="row"
-        justifyContent="space-between"
+        direction={"row"}
+        sx={{ justifyContent: "space-between" }}
       >
         <MathBlock expr={`${label}: ${valueMsg}`} />
         {expr !== undefined && (

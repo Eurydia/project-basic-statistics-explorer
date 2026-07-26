@@ -73,7 +73,7 @@ export const DatasetModeDisplayBlock: FC<Props> = memo(({ dataset }) => {
             alignItems: "baseline",
           }}
         >
-          <Typography fontWeight={700}>{`ฐานนิยม:`}</Typography>
+          <Typography sx={{ fontWeigth: 700 }}>{`ฐานนิยม:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>
         </Typography>
       }

@@ -10,7 +10,7 @@ export const Attribution: FC = memo(() => {
       <Typography>
         {`เว็ปไซต์จัดทำให้เป็นสื่อการสอนกลุ่มสาระการรู้เรียนคณิตศาสตร์ โรงเรียนอยุธยาวิทยาลัย`}
       </Typography>
-      <Typography fontWeight={700}>{`พัฒนาและปรับปรุงโดย`}</Typography>
+      <Typography sx={{ fontWeigth: 700 }}>{`พัฒนาและปรับปรุงโดย`}</Typography>
       <Typography>{`คุณครูชุติมา ประภัสสรพิทยา และ`}</Typography>
       <Typography>{`นายธนกร พุทธรักษา`}</Typography>
       <Typography>{`(แก้ไขครั้งล่าสุดเมื่อ: 19 มิถุนายน พ.ศ. 2568)`}</Typography>

@@ -83,7 +83,9 @@ export const DatasetQ1DisplayBlock: FC<Props> = memo(
               alignItems: "baseline",
             }}
           >
-            <Typography fontWeight={700}>{`ควอร์ไทล์ที่ 1:`}</Typography>
+            <Typography
+              sx={{ fontWeigth: 700 }}
+            >{`ควอร์ไทล์ที่ 1:`}</Typography>
             <MathJax dynamic>{msg}</MathJax>
           </Typography>
         }

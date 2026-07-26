@@ -90,7 +90,9 @@ export const DatasetPercentileDisplayBlock: FC<Props> = memo(
                   alignItems: "baseline",
                 }}
               >
-                <Typography fontWeight={700}>{`เปอร์เซ็นไทล์ ${p}:`}</Typography>
+                <Typography
+                  sx={{ fontWeigth: 700 }}
+                >{`เปอร์เซ็นไทล์ ${p}:`}</Typography>
                 <MathJax dynamic>{msg}</MathJax>
               </Typography>
             </Grid>
