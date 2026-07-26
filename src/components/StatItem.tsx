@@ -1,4 +1,6 @@
-import { Collapse, Stack, Typography } from "@mui/material";
+import Button from "@mui/material/Button";
+import Collapse from "@mui/material/Collapse";
+import Stack from "@mui/material/Stack";
 import { type FC, memo, useCallback, useMemo, useState } from "react";
 import { MathBlock } from "./data-display/MathBlock";
 
@@ -31,26 +33,30 @@ export const StatItem: FC<{
   const handleToggleExpr = useCallback(() => setShowExpr((prev) => !prev), []);
 
   return (
-    <Stack sx={{ flexWrap: "warp" }}>
+    <Stack component="article" sx={{ flexWrap: "warp" }}>
       <Stack
+        component="header"
         spacing={1}
         direction={"row"}
         sx={{ justifyContent: "space-between" }}
       >
         <MathBlock expr={`${label}: ${valueMsg}`} />
         {expr !== undefined && (
-          <Typography
+          <Button
+            color="inherit"
             onClick={handleToggleExpr}
+            size="small"
             sx={{
+              minWidth: 0,
               userSelect: "none",
-              cursor: "pointer",
               "&:hover": {
                 textDecorationLine: "underline",
               },
             }}
+            variant="text"
           >
             {showExpr ? "(ซ่อน)" : "(แสดง)"}
-          </Typography>
+          </Button>
         )}
       </Stack>
       {expr !== undefined && (

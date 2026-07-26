@@ -1,11 +1,8 @@
-import {
-  FormControl,
-  FormControlLabel,
-  FormLabel,
-  Radio,
-  RadioGroup,
-  Typography,
-} from "@mui/material";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import FormLabel from "@mui/material/FormLabel";
+import Radio from "@mui/material/Radio";
+import RadioGroup from "@mui/material/RadioGroup";
 import { type ChangeEvent, type FC, memo, useCallback } from "react";
 
 export const DatasetOriginInput: FC<{
@@ -17,9 +14,9 @@ export const DatasetOriginInput: FC<{
     [onChange],
   );
   return (
-    <FormControl>
-      <FormLabel>
-        <Typography color="textPrimary">{`แหล่งที่มาของข้อมูล`}</Typography>
+    <FormControl component="fieldset">
+      <FormLabel component="legend" sx={{ color: "text.primary" }}>
+        {`แหล่งที่มาของข้อมูล`}
       </FormLabel>
       <RadioGroup row value={value} onChange={handleChange}>
         <FormControlLabel

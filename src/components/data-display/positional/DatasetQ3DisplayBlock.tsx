@@ -1,9 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
-import { CollapsibleCard } from "../../surface/CollapsibleCard";
+import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
 export const DatasetQ3DisplayBlock: FC<{
@@ -72,7 +73,7 @@ export const DatasetQ3DisplayBlock: FC<{
     <CollapsibleCard
       slotTitle={
         <Typography
-          component="div"
+          component="h3"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -81,7 +82,10 @@ export const DatasetQ3DisplayBlock: FC<{
             alignItems: "baseline",
           }}
         >
-          <Typography sx={{ fontWeigth: 700 }}>{`ควอร์ไทล์ที่ 3:`}</Typography>
+          <Typography
+            component="span"
+            sx={{ fontWeigth: 700 }}
+          >{`ควอร์ไทล์ที่ 3:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>
         </Typography>
       }

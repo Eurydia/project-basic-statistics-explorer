@@ -1,7 +1,14 @@
-import { useTheme } from "@mui/material";
+import Button from "@mui/material/Button";
+import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
+import { Chart } from "chart.js";
+import zoomPlugin from "chartjs-plugin-zoom";
 import { max, min } from "d3-array";
 import { type FC, memo, useEffect, useRef } from "react";
+
+Chart.register(zoomPlugin);
 
 export const BoxPlot: FC<{
   data?: {
@@ -19,6 +26,10 @@ export const BoxPlot: FC<{
     palette: { primary, secondary },
   } = useTheme();
 
+  const resetView = () => {
+    chartRef.current?.resetZoom();
+  };
+
   useEffect(() => {
     if (canvasRef.current === null) {
       return;
@@ -30,6 +41,16 @@ export const BoxPlot: FC<{
     if (chartRef.current !== null) {
       chartRef.current.destroy();
     }
+
+    const fullMin =
+      data === undefined
+        ? undefined
+        : Math.min(data.whiskerMin, min(data.items) ?? data.whiskerMin);
+    const fullMax =
+      data === undefined
+        ? undefined
+        : Math.max(data.whiskerMax, max(data.items) ?? data.whiskerMax);
+
     chartRef.current = new BoxPlotChart(ctx, {
       data: {
         labels: [""],
@@ -67,21 +88,39 @@ export const BoxPlot: FC<{
       options: {
         indexAxis: "y",
         responsive: true,
+        plugins: {
+          zoom: {
+            limits: {
+              x: {
+                min: fullMin,
+                max: fullMax,
+              },
+            },
+            pan: {
+              enabled: data !== undefined,
+              mode: "x",
+              threshold: 5,
+            },
+            zoom: {
+              mode: "x",
+              wheel: {
+                enabled: data !== undefined,
+                modifierKey: "ctrl",
+              },
+              pinch: {
+                enabled: data !== undefined,
+              },
+            },
+          },
+        },
         scales:
           data === undefined
             ? undefined
             : {
                 x: {
                   type: "linear",
-                  suggestedMin: Math.min(
-                    data.whiskerMin,
-                    min(data.items) ?? data.whiskerMin,
-                  ),
-                  suggestedMax: Math.max(
-                    data.whiskerMax,
-                    max(data.items) ?? data.whiskerMax,
-                  ),
-                  grace: "5%",
+                  min: data.whiskerMin,
+                  max: data.whiskerMax,
                   beginAtZero: false,
                 },
               },
@@ -90,5 +129,37 @@ export const BoxPlot: FC<{
     return () => chartRef.current?.destroy();
   }, [data, primary.dark, primary.light, secondary.light]);
 
-  return <canvas ref={canvasRef} />;
+  return (
+    <Stack spacing={2}>
+      <Typography
+        component="figcaption"
+        variant="caption"
+        sx={{
+          alignSelf: "flex-start",
+          width: "fit-content",
+          paddingX: 1.5,
+          paddingY: 0.75,
+          backgroundColor: "secondary.light",
+          borderLeft: 5,
+          borderColor: "secondary.dark",
+          borderRadius: "3px 8px 4px 6px",
+          boxShadow: "3px 4px 0 rgba(37, 71, 106, 0.14)",
+          fontWeight: 700,
+          transform: "rotate(-0.35deg)",
+        }}
+      >
+        ลากกราฟในแนวนอนเพื่อดูค่านอกเกณฑ์ กด Ctrl พร้อมหมุนล้อเมาส์หรือบีบนิ้วเพื่อซูม
+      </Typography>
+      <canvas ref={canvasRef} />
+      <Button
+        color="error"
+        onClick={resetView}
+        size="small"
+        sx={{ width: "fit-content" }}
+        variant="contained"
+      >
+        กลับสู่ช่วงข้อมูลหลัก
+      </Button>
+    </Stack>
+  );
 });

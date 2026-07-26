@@ -1,9 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { MathJax } from "better-react-mathjax";
 import { max } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
-import { CollapsibleCard } from "../../surface/CollapsibleCard";
+import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
 export const DatasetModeDisplayBlock: FC<{
@@ -64,7 +65,7 @@ export const DatasetModeDisplayBlock: FC<{
     <CollapsibleCard
       slotTitle={
         <Typography
-          component="div"
+          component="h3"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -73,7 +74,10 @@ export const DatasetModeDisplayBlock: FC<{
             alignItems: "baseline",
           }}
         >
-          <Typography sx={{ fontWeigth: 700 }}>{`ฐานนิยม:`}</Typography>
+          <Typography
+            component="span"
+            sx={{ fontWeigth: 700 }}
+          >{`ฐานนิยม:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>
         </Typography>
       }

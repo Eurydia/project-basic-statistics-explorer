@@ -1,7 +1,10 @@
-import { Alert, AlertTitle, Paper, Stack, Typography } from "@mui/material";
+import Alert from "@mui/material/Alert";
+import AlertTitle from "@mui/material/AlertTitle";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { type FC, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
-import { MathBlock } from "./MathBlock";
 
 export const DatasetSourceDisplay: FC<{
   dataset: number[];
@@ -18,12 +21,14 @@ export const DatasetSourceDisplay: FC<{
   }, [dataset]);
 
   return (
-    <Stack spacing={1}>
-      <MathBlock expr={`ข้อมูลที่จะถูกใช้ $${sizeMsg}$`} />
+    <Stack component="section" spacing={1.5}>
+      <Typography component="h2" variant="body1">
+        {`ข้อมูลที่จะถูกใช้ ${sizeMsg}`}
+      </Typography>
       <Paper
         variant="outlined"
         sx={{
-          padding: 2,
+          padding: 2.5,
         }}
       >
         {parsedDataset.length === 0 ? (

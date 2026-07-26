@@ -1,9 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
-import { CollapsibleCard } from "../../surface/CollapsibleCard";
+import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
 export const DatasetIQRDisplayBlock: FC<{
@@ -44,7 +45,7 @@ export const DatasetIQRDisplayBlock: FC<{
     <CollapsibleCard
       slotTitle={
         <Typography
-          component="div"
+          component="h3"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -54,6 +55,7 @@ export const DatasetIQRDisplayBlock: FC<{
           }}
         >
           <Typography
+            component="span"
             sx={{ fontWeigth: 700 }}
           >{`พิสัยระหว่างควอร์ไทล์:`}</Typography>
           <MathJax dynamic>{msg}</MathJax>

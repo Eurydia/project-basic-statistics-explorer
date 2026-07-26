@@ -1,4 +1,5 @@
-import { Paper, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Typography from "@mui/material/Typography";
 import { MathJax } from "better-react-mathjax";
 import { type FC, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
@@ -25,9 +26,9 @@ export const DatasetOutlierDisplayBlock: FC<{
   }, [orderedDataset]);
 
   return (
-    <Paper variant="outlined" sx={{ padding: 2 }}>
+    <Paper component="article" variant="outlined" sx={{ padding: 2 }}>
       <Typography
-        component="div"
+        component="h3"
         sx={{
           display: "flex",
           flexDirection: "row",
@@ -36,7 +37,10 @@ export const DatasetOutlierDisplayBlock: FC<{
           alignItems: "baseline",
         }}
       >
-        <Typography sx={{ fontWeigth: 700 }}>{`ค่านอกเกณฑ์:`}</Typography>
+        <Typography
+          component="span"
+          sx={{ fontWeigth: 700 }}
+        >{`ค่านอกเกณฑ์:`}</Typography>
         <MathJax dynamic>{`${msg}`}</MathJax>
       </Typography>
     </Paper>

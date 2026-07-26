@@ -1,4 +1,4 @@
-import { OutlinedInput } from "@mui/material";
+import OutlinedInput from "@mui/material/OutlinedInput";
 import { type ChangeEvent, type FC, memo, useCallback } from "react";
 
 export const DatasetSourceInput: FC<{
@@ -13,6 +13,7 @@ export const DatasetSourceInput: FC<{
   );
   return (
     <OutlinedInput
+      id="dataset-source"
       placeholder="10, 20, 10, 30, 90"
       multiline
       minRows={6}

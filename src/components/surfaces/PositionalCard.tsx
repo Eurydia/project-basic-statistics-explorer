@@ -1,6 +1,9 @@
-import { Paper, Stack, Typography } from "@mui/material";
+import Paper from "@mui/material/Paper";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { type FC, memo, useMemo } from "react";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
+import { notebookHeadingSx, notebookSurfaceSx } from "@/theme";
 import { BoxPlot } from "../data-display/BoxPlot";
 import { DatasetOutlierDisplayBlock } from "../data-display/positional/DatasetOutlierDisplayBlock";
 import { DatasetPercentileDisplayBlock } from "../data-display/positional/DatasetPercentileDisplayBlock";
@@ -40,10 +43,16 @@ export const PositionalCard: FC<{
   }, [orderedDataset]);
 
   return (
-    <Paper elevation={4} sx={{ padding: 2 }}>
-      <Stack spacing={1}>
-        <Typography component="div" variant="h5">
-          {`ค่าวัดตำแหน่งของข้อมูล`}
+    <Paper
+      component="section"
+      elevation={4}
+      sx={[notebookSurfaceSx, { padding: { xs: 2.5, md: 3 } }]}
+    >
+      <Stack spacing={1.75}>
+        <Typography component="h2" variant="h5" sx={notebookHeadingSx}>
+          <Typography component="span" variant="inherit">
+            {`ค่าวัดตำแหน่งของข้อมูล`}
+          </Typography>
         </Typography>
         <DatasetQ1DisplayBlock
           orderedDataset={orderedDataset}
@@ -65,7 +74,11 @@ export const PositionalCard: FC<{
           orderedDataset={orderedDataset}
           fromPopulation={fromPopulation}
         />
-        <Paper variant="outlined" sx={{ padding: 2 }}>
+        <Paper
+          component="figure"
+          variant="outlined"
+          sx={{ margin: 0, padding: { xs: 2, md: 2.5 } }}
+        >
           <BoxPlot data={plotData} />
         </Paper>
       </Stack>

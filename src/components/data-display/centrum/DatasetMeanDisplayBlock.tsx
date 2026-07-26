@@ -1,9 +1,10 @@
-import { Stack, Typography } from "@mui/material";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
 import { MathJax } from "better-react-mathjax";
 import { mean, sum } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
 import { formatNumberParentheses } from "@/core/formatter";
-import { CollapsibleCard } from "../../surface/CollapsibleCard";
+import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
 
 export const DatasetMeanDisplayBlock: FC<{
@@ -55,7 +56,7 @@ export const DatasetMeanDisplayBlock: FC<{
     <CollapsibleCard
       slotTitle={
         <Typography
-          component="div"
+          component="h3"
           sx={{
             display: "flex",
             flexDirection: "row",
@@ -64,7 +65,10 @@ export const DatasetMeanDisplayBlock: FC<{
             alignItems: "baseline",
           }}
         >
-          <Typography sx={{ fontWeigth: 700 }}>{`ค่าเฉลี่ย:`}</Typography>
+          <Typography
+            component="span"
+            sx={{ fontWeigth: 700 }}
+          >{`ค่าเฉลี่ย:`}</Typography>
           <MathJax dynamic>{result.msg}</MathJax>
         </Typography>
       }
