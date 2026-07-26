@@ -18,7 +18,7 @@ export const App: FC = () => {
 
   return (
     <SplitPanelLayout
-      left={
+      panel={
         <Paper
           component="section"
           elevation={4}
@@ -42,21 +42,20 @@ export const App: FC = () => {
           </Stack>
         </Paper>
       }
-      right={
-        <Stack spacing={{ xs: 2.5, md: 3 }}>
-          <CentrumCard {...data} />
-          <DispersionCard {...data} />
-          <PositionalCard {...data} />
-          <Paper
-            component="footer"
-            variant="elevation"
-            sx={[notebookSurfaceSx, { padding: { xs: 2.5, md: 3 } }]}
-            elevation={4}
-          >
-            <Attribution />
-          </Paper>
-        </Stack>
-      }
-    />
+    >
+      <Stack spacing={{ xs: 2.5, md: 3 }}>
+        <CentrumCard {...data} />
+        <DispersionCard {...data} />
+        <PositionalCard {...data} />
+        <Paper
+          component="footer"
+          variant="elevation"
+          sx={[notebookSurfaceSx, { padding: { xs: 2.5, md: 3 } }]}
+          elevation={4}
+        >
+          <Attribution />
+        </Paper>
+      </Stack>
+    </SplitPanelLayout>
   );
 };

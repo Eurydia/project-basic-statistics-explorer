@@ -133,28 +133,24 @@ export const BoxPlot: FC<{
     <Stack spacing={2}>
       <Typography
         component="figcaption"
-        variant="caption"
-        sx={{
+        sx={(t) => ({
           alignSelf: "flex-start",
-          width: "fit-content",
-          paddingX: 1.5,
-          paddingY: 0.75,
-          backgroundColor: "secondary.light",
+          paddingX: 4,
+          paddingY: 2,
+          backgroundColor: t.alpha(t.palette.secondary.light, 0.4),
           borderLeft: 5,
-          borderColor: "secondary.dark",
+          borderColor: t.palette.secondary.dark,
           borderRadius: "3px 8px 4px 6px",
           boxShadow: "3px 4px 0 rgba(37, 71, 106, 0.14)",
-          fontWeight: 700,
-          transform: "rotate(-0.35deg)",
-        }}
+        })}
       >
-        ลากกราฟในแนวนอนเพื่อดูค่านอกเกณฑ์ กด Ctrl พร้อมหมุนล้อเมาส์หรือบีบนิ้วเพื่อซูม
+        ลากกราฟในแนวนอนเพื่อดูค่านอกเกณฑ์ กด Ctrl
+        พร้อมหมุนล้อเมาส์หรือบีบนิ้วเพื่อซูม
       </Typography>
       <canvas ref={canvasRef} />
       <Button
         color="error"
         onClick={resetView}
-        size="small"
         sx={{ width: "fit-content" }}
         variant="contained"
       >
