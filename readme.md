@@ -21,11 +21,3 @@ Lightweight, interactive visualizer for common data set measures (center, disper
 ## Measures of Position
 
 ![](assets/images/position.png)
-
-## Attibution
-
-> เว็ปไซต์จัดทำให้เป็นสื่อการสอนกลุ่มสาระการรู้เรียนคณิตศาสตร์ โรงเรียนอยุธยาวิทยาลัย
->
-> พัฒนาและปรับปรุงโดย
->
-> คุณครูชุติมา ประภัสสรพิทยา และ นายธนกร พุทธรักษา
