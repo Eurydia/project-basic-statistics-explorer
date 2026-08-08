@@ -13,12 +13,16 @@ export const Attribution: FC = memo(() => {
       <Typography>
         {`เว็ปไซต์จัดทำให้เป็นสื่อการสอนกลุ่มสาระการรู้เรียนคณิตศาสตร์ โรงเรียนอยุธยาวิทยาลัย`}
       </Typography>
-      <Typography sx={{ fontWeigth: 700 }}>{`พัฒนาและปรับปรุงโดย`}</Typography>
-      <Stack>
-        <Typography>{`คุณครูชุติมา ประภัสสรพิทยา และ`}</Typography>
-        <Typography>{`นายธนกร พุทธรักษา`}</Typography>
+      <Typography component="h3" variant="body1" sx={{ fontWeigth: 700 }}>
+        {`พัฒนาและปรับปรุงโดย`}
+      </Typography>
+      <Stack component="ul" sx={{ listStyle: "none", margin: 0, padding: 0 }}>
+        <Typography component="li">{`คุณครูชุติมา ประภัสสรพิทยา และ`}</Typography>
+        <Typography component="li">{`นายธนกร พุทธรักษา`}</Typography>
       </Stack>
-      <Typography>{`(แก้ไขครั้งล่าสุดเมื่อ: 19 มิถุนายน พ.ศ. 2568)`}</Typography>
+      <Typography component="time" dateTime="2025-06-19">
+        {`(แก้ไขครั้งล่าสุดเมื่อ: 19 มิถุนายน พ.ศ. 2568)`}
+      </Typography>
     </Stack>
   );
 });

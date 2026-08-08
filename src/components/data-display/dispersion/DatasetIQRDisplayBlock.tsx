@@ -1,7 +1,8 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
+import { MathBlock } from "@/components/data-display/MathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
@@ -44,29 +45,20 @@ export const DatasetIQRDisplayBlock: FC<{
   return (
     <CollapsibleCard
       slotTitle={
-        <Typography
-          component="h3"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 1,
-            alignItems: "baseline",
-          }}
-        >
-          <Typography
-            component="span"
-            sx={{ fontWeigth: 700 }}
-          >{`พิสัยระหว่างควอร์ไทล์:`}</Typography>
-          <MathJax dynamic>{msg}</MathJax>
+        <Typography component="h3">
+          <strong>{`พิสัยระหว่างควอร์ไทล์:`}</strong>
+          {` `}
+          <InlineMathBlock expr={msg} />
         </Typography>
       }
       slotContent={
         <Stack spacing={0.5}>
-          <MathJax dynamic>{`สูตร: $$Q_{3} - Q_{1}$$`}</MathJax>
+          <MathBlock expr={`สูตร: $$Q_{3} - Q_{1}$$`} />
           {value !== undefined && (
             <Fragment>
-              <Typography>{`ขั้นตอนการคำนวณ:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`ขั้นตอนการคำนวณ:`}
+              </Typography>
               {calcSteps.map((msg, index) => (
                 <StackedEquationItem
                   latex={`$$${msg}$$`}

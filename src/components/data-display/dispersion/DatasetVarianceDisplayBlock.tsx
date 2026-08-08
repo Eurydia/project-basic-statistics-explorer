@@ -1,8 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { mean } from "d3-array";
 import { type FC, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
+import { MathBlock } from "@/components/data-display/MathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 
@@ -40,26 +41,15 @@ export const DatasetVarianceDisplayBlock: FC<{
   return (
     <CollapsibleCard
       slotTitle={
-        <Typography
-          component="h3"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 1,
-            alignItems: "baseline",
-          }}
-        >
-          <Typography
-            component="span"
-            sx={{ fontWeigth: 700 }}
-          >{`ค่าความแปรปรวน:`}</Typography>
-          <MathJax dynamic>{msg}</MathJax>
+        <Typography component="h3">
+          <strong>{`ค่าความแปรปรวน:`}</strong>
+          {` `}
+          <InlineMathBlock expr={msg} />
         </Typography>
       }
       slotContent={
         <Stack spacing={0.5}>
-          <MathJax dynamic>{`สูตร: $$${formulaMsg}$$`}</MathJax>
+          <MathBlock expr={`สูตร: $$${formulaMsg}$$`} />
         </Stack>
       }
     />

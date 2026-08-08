@@ -3,12 +3,8 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { BoxPlotChart } from "@sgratzl/chartjs-chart-boxplot";
-import { Chart } from "chart.js";
-import zoomPlugin from "chartjs-plugin-zoom";
 import { max, min } from "d3-array";
 import { type FC, memo, useEffect, useRef } from "react";
-
-Chart.register(zoomPlugin);
 
 export const BoxPlot: FC<{
   data?: {
@@ -138,10 +134,11 @@ export const BoxPlot: FC<{
           paddingX: 4,
           paddingY: 2,
           backgroundColor: t.alpha(t.palette.secondary.light, 0.4),
-          borderLeft: 5,
-          borderColor: t.palette.secondary.dark,
-          borderRadius: "3px 8px 4px 6px",
-          boxShadow: "3px 4px 0 rgba(37, 71, 106, 0.14)",
+          borderLeftWidth: t.spacing(0.625),
+          borderLeftStyle: "solid",
+          borderLeftColor: t.palette.secondary.dark,
+          borderRadius: t.spacing(0.375, 1, 0.5, 0.75),
+          boxShadow: `${t.spacing(0.375)} ${t.spacing(0.5)} 0 ${t.alpha(t.palette.text.primary, 0.14)}`,
         })}
       >
         ลากกราฟในแนวนอนเพื่อดูค่านอกเกณฑ์ กด Ctrl

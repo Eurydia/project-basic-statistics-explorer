@@ -18,7 +18,7 @@ export const SplitPanelLayout: FC<
       }}
     >
       <Grid
-        component="aside"
+        component="header"
         size={{ xs: 12, md: 4 }}
         sx={(t) => ({
           position: { xs: "static", md: "sticky" },

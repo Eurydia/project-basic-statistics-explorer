@@ -1,11 +1,10 @@
 import { styled } from "@mui/material/styles";
-import Typography from "@mui/material/Typography";
 
-export const NotebookHeadingHighlight = styled(Typography)({
-  paddingLeft: 4,
-  paddingRight: 4,
+export const NotebookHeadingHighlight = styled("span")(({ theme }) => ({
+  paddingLeft: theme.spacing(0.5),
+  paddingRight: theme.spacing(0.5),
   boxDecorationBreak: "clone",
   WebkitBoxDecorationBreak: "clone",
   backgroundImage:
-    "linear-gradient(178deg, transparent 0%, transparent 54%, rgba(255, 215, 106, 0.48) 55%, rgba(255, 215, 106, 0.48) 91%, transparent 92%)",
-});
+    `linear-gradient(178deg, transparent 0%, transparent 54%, ${theme.alpha(theme.palette.secondary.light, 0.48)} 55%, ${theme.alpha(theme.palette.secondary.light, 0.48)} 91%, transparent 92%)`,
+}));

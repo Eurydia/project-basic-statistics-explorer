@@ -7,9 +7,10 @@ export const NotebookPaper = styled(Paper)(({ theme }) => ({
   overflow: "visible",
   backgroundColor: theme.palette.background.paper,
   backgroundImage:
-    "repeating-linear-gradient(180deg, transparent 0, transparent 31px, rgba(74, 132, 173, 0.1) 32px)",
-  border: "1px solid",
+    `repeating-linear-gradient(180deg, transparent 0, transparent ${theme.spacing(3.875)}, ${theme.alpha(theme.palette.primary.main, 0.1)} ${theme.spacing(4)})`,
+  borderWidth: theme.spacing(0.125),
+  borderStyle: "solid",
   borderColor: theme.palette.divider,
-  borderRadius: "7px 11px 8px 10px",
-  boxShadow: "7px 8px 0 rgba(37, 71, 106, 0.13)",
+  borderRadius: theme.spacing(0.875, 1.375, 1, 1.25),
+  boxShadow: `${theme.spacing(0.875)} ${theme.spacing(1)} 0 ${theme.alpha(theme.palette.text.primary, 0.13)}`,
 })) as typeof Paper;

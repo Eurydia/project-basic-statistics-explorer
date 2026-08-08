@@ -31,23 +31,23 @@ export const DatasetSourceDisplay: FC<{
           padding: 2.5,
         }}
       >
-        {parsedDataset.length === 0 ? (
-          <Typography>{`ไม่มีข้อมูล`}</Typography>
-        ) : (
-          <Typography
-            sx={{
-              wordBreak: "break-all",
-              wordWrap: "break-word",
-              whiteSpace: "wrap",
-            }}
-          >
-            {parsedDataset.join(", ")}
-          </Typography>
-        )}
+        <Typography
+          component="output"
+          sx={{
+            display: "block",
+            wordBreak: "break-all",
+            wordWrap: "break-word",
+            whiteSpace: "wrap",
+          }}
+        >
+          {parsedDataset.length === 0
+            ? `ไม่มีข้อมูล`
+            : parsedDataset.join(", ")}
+        </Typography>
       </Paper>
       {hasInvalid && (
         <Alert severity="warning">
-          <AlertTitle>{`คำเตือน`}</AlertTitle>
+          <AlertTitle component="h3">{`คำเตือน`}</AlertTitle>
           <Typography>{`ข้อมูลบางส่วนไม่ถูกต้อง`}</Typography>
         </Alert>
       )}

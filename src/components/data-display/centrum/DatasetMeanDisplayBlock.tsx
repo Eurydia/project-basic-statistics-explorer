@@ -1,8 +1,9 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { mean, sum } from "d3-array";
 import { type FC, Fragment, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
+import { MathBlock } from "@/components/data-display/MathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
 import { StackedEquationItem } from "../StackedEquationItem";
@@ -55,29 +56,20 @@ export const DatasetMeanDisplayBlock: FC<{
   return (
     <CollapsibleCard
       slotTitle={
-        <Typography
-          component="h3"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 1,
-            alignItems: "baseline",
-          }}
-        >
-          <Typography
-            component="span"
-            sx={{ fontWeigth: 700 }}
-          >{`ค่าเฉลี่ย:`}</Typography>
-          <MathJax dynamic>{result.msg}</MathJax>
+        <Typography component="h3">
+          <strong>{`ค่าเฉลี่ย:`}</strong>
+          {` `}
+          <InlineMathBlock expr={result.msg} />
         </Typography>
       }
       slotContent={
         <Stack spacing={0.5}>
-          <MathJax dynamic>{`สูตร:  $$${formulaBaseMsg}$$`}</MathJax>
+          <MathBlock expr={`สูตร: $$${formulaBaseMsg}$$`} />
           {result.value !== undefined && (
             <Fragment>
-              <Typography>{`ขั้นตอนการคำนวณ:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`ขั้นตอนการคำนวณ:`}
+              </Typography>
               {calcSteps.map((msg, index) => (
                 <StackedEquationItem
                   latex={`$$${msg}$$`}

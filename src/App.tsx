@@ -21,7 +21,6 @@ export const App: FC = () => {
     <SplitPanelLayout
       panel={
         <NotebookPaper
-          component="section"
           elevation={4}
           sx={{
             padding: { xs: 2.5, md: 3 },

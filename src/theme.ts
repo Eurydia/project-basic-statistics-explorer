@@ -17,69 +17,81 @@ export const theme = createTheme({
   },
   components: {
     MuiCssBaseline: {
-      styleOverrides: {
+      styleOverrides: (theme) => ({
         "html, body, #root": { minHeight: "100%" },
         body: {
-          backgroundColor: "#f8f2df",
+          backgroundColor: theme.palette.background.default,
           backgroundImage: [
-            "linear-gradient(rgba(67, 128, 171, 0.12) 1px, transparent 1px)",
-            "linear-gradient(90deg, rgba(67, 128, 171, 0.12) 1px, transparent 1px)",
-            "linear-gradient(rgba(67, 128, 171, 0.08) 1px, transparent 1px)",
-            "linear-gradient(90deg, rgba(67, 128, 171, 0.08) 1px, transparent 1px)",
-            "linear-gradient(90deg, transparent 47px, rgba(221, 103, 103, 0.25) 48px, transparent 49px)",
+            `linear-gradient(${theme.alpha(theme.palette.primary.main, 0.12)} ${theme.spacing(0.125)}, transparent ${theme.spacing(0.125)})`,
+            `linear-gradient(90deg, ${theme.alpha(theme.palette.primary.main, 0.12)} ${theme.spacing(0.125)}, transparent ${theme.spacing(0.125)})`,
+            `linear-gradient(${theme.alpha(theme.palette.primary.main, 0.08)} ${theme.spacing(0.125)}, transparent ${theme.spacing(0.125)})`,
+            `linear-gradient(90deg, ${theme.alpha(theme.palette.primary.main, 0.08)} ${theme.spacing(0.125)}, transparent ${theme.spacing(0.125)})`,
+            `linear-gradient(90deg, transparent ${theme.spacing(5.875)}, ${theme.alpha(theme.palette.secondary.main, 0.25)} ${theme.spacing(6)}, transparent ${theme.spacing(6.125)})`,
           ].join(", "),
-          backgroundSize:
-            "24px 24px, 24px 24px, 120px 120px, 120px 120px, 100% 100%",
+          backgroundSize: [
+            theme.spacing(3, 3),
+            theme.spacing(3, 3),
+            theme.spacing(15, 15),
+            theme.spacing(15, 15),
+            "100% 100%",
+          ].join(", "),
           backgroundAttachment: "fixed",
         },
-      },
+      }),
     },
     MuiStack: { defaultProps: { useFlexGap: true } },
     MuiPaper: {
       styleOverrides: {
-        root: { backgroundColor: "#fffdf7", backgroundImage: "none" },
-        elevation4: { boxShadow: "6px 7px 0 rgba(37, 71, 106, 0.13)" },
-        outlined: {
-          borderColor: "rgba(39, 75, 113, 0.28)",
-          borderRadius: "5px 9px 6px 8px",
-        },
+        root: ({ theme }) => ({
+          backgroundColor: theme.palette.background.paper,
+          backgroundImage: "none",
+        }),
+        elevation4: ({ theme }) => ({
+          boxShadow: `${theme.spacing(0.75)} ${theme.spacing(0.875)} 0 ${theme.alpha(theme.palette.text.primary, 0.13)}`,
+        }),
+        outlined: ({ theme }) => ({
+          borderColor: theme.palette.divider,
+          borderRadius: theme.spacing(0.625, 1.125, 0.75, 1),
+        }),
       },
     },
     MuiButton: {
       defaultProps: { disableElevation: true, disableRipple: true },
       styleOverrides: {
-        root: {
-          borderRadius: "4px 8px 5px 7px",
-          borderWidth: 2,
-          "&:hover": { borderWidth: 2 },
-        },
-        contained: {
-          boxShadow: "3px 3px 0 rgba(37, 71, 106, 0.22)",
+        root: ({ theme }) => ({
+          borderRadius: theme.spacing(0.5, 1, 0.625, 0.875),
+          borderWidth: theme.spacing(0.25),
+          ":hover": { borderWidth: theme.spacing(0.25) },
+        }),
+        contained: ({ theme }) => ({
+          boxShadow: `${theme.spacing(0.375)} ${theme.spacing(0.375)} 0 ${theme.alpha(theme.palette.text.primary, 0.22)}`,
           transform: "rotate(-0.35deg)",
-        },
-        outlined: {
-          backgroundColor: "rgba(255, 253, 247, 0.72)",
-          boxShadow: "2px 2px 0 rgba(37, 71, 106, 0.12)",
+        }),
+        outlined: ({ theme }) => ({
+          backgroundColor: theme.alpha(theme.palette.background.paper, 0.72),
+          boxShadow: `${theme.spacing(0.25)} ${theme.spacing(0.25)} 0 ${theme.alpha(theme.palette.text.primary, 0.12)}`,
           transform: "rotate(0.3deg)",
-        },
+        }),
       },
     },
     MuiOutlinedInput: {
       styleOverrides: {
-        root: {
-          backgroundColor: "rgba(255, 253, 247, 0.86)",
-          borderRadius: "5px 9px 6px 8px",
-          boxShadow: "inset 4px 0 0 rgba(224, 104, 104, 0.18)",
-        },
+        root: ({ theme }) => ({
+          backgroundColor: theme.alpha(theme.palette.background.paper, 0.86),
+          borderRadius: theme.spacing(0.625, 1.125, 0.75, 1),
+          boxShadow: `inset ${theme.spacing(0.5)} 0 0 ${theme.alpha(theme.palette.secondary.main, 0.18)}`,
+        }),
       },
     },
     MuiAlert: {
       styleOverrides: {
-        root: {
-          border: "1px dashed rgba(126, 91, 16, 0.45)",
-          borderRadius: "5px 9px 6px 8px",
-          boxShadow: "3px 3px 0 rgba(126, 91, 16, 0.12)",
-        },
+        root: ({ theme }) => ({
+          borderWidth: theme.spacing(0.125),
+          borderStyle: "dashed",
+          borderColor: theme.alpha(theme.palette.secondary.dark, 0.45),
+          borderRadius: theme.spacing(0.625, 1.125, 0.75, 1),
+          boxShadow: `${theme.spacing(0.375)} ${theme.spacing(0.375)} 0 ${theme.alpha(theme.palette.secondary.dark, 0.12)}`,
+        }),
       },
     },
   },
@@ -97,7 +109,7 @@ export const theme = createTheme({
       contrastText: "#2d4057",
     },
     background: { default: "#f8f2df", paper: "#fffdf7" },
-    divider: "rgba(39, 75, 113, 0.28)",
+    divider: "#274b7147",
     text: { primary: "#243f5d", secondary: "#5f6e7d" },
   },
 });

@@ -6,16 +6,20 @@ import RadioGroup from "@mui/material/RadioGroup";
 import { type ChangeEvent, type FC, memo, useCallback } from "react";
 
 export const DatasetOriginInput: FC<{
-  value: string;
-  onChange: (v: string) => unknown;
+  value: "0" | "1";
+  onChange: (v: "0" | "1") => unknown;
 }> = memo(({ onChange, value }) => {
   const handleChange = useCallback(
-    ({ target: { value } }: ChangeEvent<HTMLInputElement>) => onChange(value),
+    ({ target: { value } }: ChangeEvent<HTMLInputElement>) =>
+      onChange(value as "0" | "1"),
     [onChange],
   );
   return (
     <FormControl component="fieldset">
-      <FormLabel component="legend" sx={{ color: "text.primary" }}>
+      <FormLabel
+        component="legend"
+        sx={{ color: (theme) => theme.palette.text.primary }}
+      >
         {`แหล่งที่มาของข้อมูล`}
       </FormLabel>
       <RadioGroup row value={value} onChange={handleChange}>
@@ -26,7 +30,11 @@ export const DatasetOriginInput: FC<{
           }
           label="ประชากร"
         />
-        <FormControlLabel value={"1"} control={<Radio />} label="กลุ่มตัวอย่าง" />
+        <FormControlLabel
+          value={"1"}
+          control={<Radio />}
+          label="กลุ่มตัวอย่าง"
+        />
       </RadioGroup>
     </FormControl>
   );

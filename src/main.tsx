@@ -4,6 +4,7 @@ import { MathJaxContext } from "better-react-mathjax";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import { App } from "./App";
+import "./libs/chart/init";
 import { theme } from "./theme";
 
 const root = document.getElementById("root");

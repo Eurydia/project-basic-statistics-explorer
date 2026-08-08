@@ -1,7 +1,8 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
+import { MathBlock } from "@/components/data-display/MathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
@@ -72,29 +73,20 @@ export const DatasetQ3DisplayBlock: FC<{
   return (
     <CollapsibleCard
       slotTitle={
-        <Typography
-          component="h3"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 1,
-            alignItems: "baseline",
-          }}
-        >
-          <Typography
-            component="span"
-            sx={{ fontWeigth: 700 }}
-          >{`ควอร์ไทล์ที่ 3:`}</Typography>
-          <MathJax dynamic>{msg}</MathJax>
+        <Typography component="h3">
+          <strong>{`ควอร์ไทล์ที่ 3:`}</strong>
+          {` `}
+          <InlineMathBlock expr={msg} />
         </Typography>
       }
       slotContent={
         <Stack spacing={0.5}>
-          <MathJax dynamic>{`สูตร: $$${formulaMsg}$$`}</MathJax>
+          <MathBlock expr={`สูตร: $$${formulaMsg}$$`} />
           {value !== undefined && (
             <Fragment>
-              <Typography>{`หาตำแหน่ง:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`หาตำแหน่ง:`}
+              </Typography>
               {posCalcSteps.map((msg, index) => (
                 <StackedEquationItem
                   latex={`$$${msg}$$`}
@@ -102,7 +94,9 @@ export const DatasetQ3DisplayBlock: FC<{
                 />
               ))}
 
-              <Typography>{`เรียงลำดับข้อมูล:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`เรียงลำดับข้อมูล:`}
+              </Typography>
               <StackedEquationItem
                 latex={`$$${orderedDataset
                   .map((dt, index) =>
@@ -112,7 +106,9 @@ export const DatasetQ3DisplayBlock: FC<{
                   )
                   .join(",")}$$`}
               />
-              <Typography>{`คำนวณค่า:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`คำนวณค่า:`}
+              </Typography>
 
               {calcSteps.map((msg, index) => (
                 <StackedEquationItem

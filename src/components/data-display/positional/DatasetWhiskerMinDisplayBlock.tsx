@@ -1,7 +1,7 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
@@ -49,26 +49,19 @@ export const DatasetWhiskerMinDisplayBlock: FC<{
   return (
     <CollapsibleCard
       slotTitle={
-        <Typography
-          component="h3"
-          sx={{
-            display: "flex",
-            flexDirection: "row",
-            flexWrap: "wrap",
-            gap: 1,
-            alignItems: "baseline",
-          }}
-        >
-          <MathJax dynamic>
-            {`$\\symbf{Q_{1} - 1.5\\left (Q_{3} - Q_{1} \\right)}: ${msg}$`}
-          </MathJax>
+        <Typography component="h3">
+          <InlineMathBlock
+            expr={`$\\symbf{Q_{1} - 1.5\\left (Q_{3} - Q_{1} \\right)}: ${msg}$`}
+          />
         </Typography>
       }
       slotContent={
         <Stack spacing={0.5}>
           {value !== undefined && (
             <Fragment>
-              <Typography>{`คำนวณค่า:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`คำนวณค่า:`}
+              </Typography>
               {calcSteps.map((msg, index) => (
                 <StackedEquationItem
                   latex={`$$${msg}$$`}

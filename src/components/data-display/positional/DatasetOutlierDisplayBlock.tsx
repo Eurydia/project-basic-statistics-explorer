@@ -1,7 +1,7 @@
 import Paper from "@mui/material/Paper";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { type FC, memo, useMemo } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
 
@@ -27,21 +27,10 @@ export const DatasetOutlierDisplayBlock: FC<{
 
   return (
     <Paper component="article" variant="outlined" sx={{ padding: 2 }}>
-      <Typography
-        component="h3"
-        sx={{
-          display: "flex",
-          flexDirection: "row",
-          flexWrap: "wrap",
-          gap: 1,
-          alignItems: "baseline",
-        }}
-      >
-        <Typography
-          component="span"
-          sx={{ fontWeigth: 700 }}
-        >{`ค่านอกเกณฑ์:`}</Typography>
-        <MathJax dynamic>{`${msg}`}</MathJax>
+      <Typography component="h3">
+        <strong>{`ค่านอกเกณฑ์:`}</strong>
+        {` `}
+        <InlineMathBlock expr={msg} />
       </Typography>
     </Paper>
   );

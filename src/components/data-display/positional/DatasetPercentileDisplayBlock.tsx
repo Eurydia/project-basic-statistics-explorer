@@ -2,8 +2,9 @@ import Grid from "@mui/material/Grid";
 import Slider from "@mui/material/Slider";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { MathJax } from "better-react-mathjax";
 import { type FC, Fragment, memo, useCallback, useMemo, useState } from "react";
+import { InlineMathBlock } from "@/components/data-display/InlineMathBlock";
+import { MathBlock } from "@/components/data-display/MathBlock";
 import { formatNumberParentheses } from "@/core/formatter";
 import { getPercentile } from "@/core/services/make-quantile-item.helper";
 import { CollapsibleCard } from "../../surfaces/CollapsibleCard";
@@ -80,21 +81,10 @@ export const DatasetPercentileDisplayBlock: FC<{
       slotTitle={
         <Grid container spacing={1} sx={{ flexGrow: 1, flexBasis: 0 }}>
           <Grid size={12}>
-            <Typography
-              component="h3"
-              sx={{
-                display: "flex",
-                flexDirection: "row",
-                flexWrap: "wrap",
-                gap: 1,
-                alignItems: "baseline",
-              }}
-            >
-              <Typography
-                component="span"
-                sx={{ fontWeigth: 700 }}
-              >{`เปอร์เซ็นไทล์ ${p}:`}</Typography>
-              <MathJax dynamic>{msg}</MathJax>
+            <Typography component="h3">
+              <strong>{`เปอร์เซ็นไทล์ ${p}:`}</strong>
+              {` `}
+              <InlineMathBlock expr={msg} />
             </Typography>
           </Grid>
           <Grid size={12}>
@@ -104,10 +94,12 @@ export const DatasetPercentileDisplayBlock: FC<{
       }
       slotContent={
         <Stack spacing={0.5}>
-          <MathJax dynamic>{`สูตร: $$${formulaMsg}$$`}</MathJax>
+          <MathBlock expr={`สูตร: $$${formulaMsg}$$`} />
           {value !== undefined && (
             <Fragment>
-              <Typography>{`หาตำแหน่ง:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`หาตำแหน่ง:`}
+              </Typography>
               {posCalcSteps.map((msg, index) => (
                 <StackedEquationItem
                   latex={`$$${msg}$$`}
@@ -115,7 +107,9 @@ export const DatasetPercentileDisplayBlock: FC<{
                 />
               ))}
 
-              <Typography>{`เรียงลำดับข้อมูล:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`เรียงลำดับข้อมูล:`}
+              </Typography>
               <StackedEquationItem
                 latex={`$$${orderedDataset
                   .map((dt, index) =>
@@ -125,7 +119,9 @@ export const DatasetPercentileDisplayBlock: FC<{
                   )
                   .join(",")}$$`}
               />
-              <Typography>{`คำนวณค่า:`}</Typography>
+              <Typography component="h4" variant="body1">
+                {`คำนวณค่า:`}
+              </Typography>
 
               {calcSteps.map((msg, index) => (
                 <StackedEquationItem

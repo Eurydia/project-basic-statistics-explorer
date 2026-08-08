@@ -33,9 +33,8 @@ export const StatItem: FC<{
   const handleToggleExpr = useCallback(() => setShowExpr((prev) => !prev), []);
 
   return (
-    <Stack component="article" sx={{ flexWrap: "warp" }}>
+    <Stack sx={{ flexWrap: "warp" }}>
       <Stack
-        component="header"
         spacing={1}
         direction={"row"}
         sx={{ justifyContent: "space-between" }}

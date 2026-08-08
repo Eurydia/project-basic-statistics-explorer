@@ -1,3 +1,4 @@
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
 import Paper from "@mui/material/Paper";
@@ -16,26 +17,28 @@ export const CollapsibleCard: FC<{
     <Paper
       component="article"
       variant="outlined"
-      sx={{
+      sx={(theme) => ({
         position: "relative",
         padding: { xs: 2.25, md: 2.5 },
         paddingLeft: { xs: 2.75, md: 3 },
         overflow: "hidden",
-        backgroundColor: "rgba(255, 253, 247, 0.74)",
+        backgroundColor: theme.alpha(theme.palette.background.paper, 0.74),
         backgroundImage:
-          "repeating-linear-gradient(180deg, transparent 0, transparent 31px, rgba(74, 132, 173, 0.09) 32px)",
-        boxShadow: "3px 3px 0 rgba(37, 71, 106, 0.08)",
-        "&::before": {
-          content: '""',
+          `repeating-linear-gradient(180deg, transparent 0, transparent ${theme.spacing(3.875)}, ${theme.alpha(theme.palette.primary.main, 0.09)} ${theme.spacing(4)})`,
+        boxShadow: `${theme.spacing(0.375)} ${theme.spacing(0.375)} 0 ${theme.alpha(theme.palette.text.primary, 0.08)}`,
+      })}
+    >
+      <Box
+        component="span"
+        sx={(theme) => ({
           position: "absolute",
           top: 0,
           bottom: 0,
-          left: 10,
-          width: 2,
-          backgroundColor: "rgba(224, 104, 104, 0.3)",
-        },
-      }}
-    >
+          left: theme.spacing(1.25),
+          width: theme.spacing(0.25),
+          backgroundColor: theme.alpha(theme.palette.secondary.main, 0.3),
+        })}
+      />
       <Stack
         component="header"
         direction={"row"}
@@ -52,14 +55,14 @@ export const CollapsibleCard: FC<{
           size="small"
           onClick={handleOpenToggle}
           variant="text"
-          sx={{
+          sx={(theme) => ({
             textWrap: "nowrap",
             minWidth: 0,
             userSelect: "none",
             paddingX: 0.75,
-            backgroundColor: "rgba(255, 215, 106, 0.34)",
+            backgroundColor: theme.alpha(theme.palette.secondary.light, 0.34),
             borderRadius: "45% 55% 48% 52%",
-          }}
+          })}
         >
           {open ? "(ซ่อน)" : "(แสดง)"}
         </Button>
