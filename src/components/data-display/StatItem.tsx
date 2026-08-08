@@ -2,7 +2,7 @@ import Button from "@mui/material/Button";
 import Collapse from "@mui/material/Collapse";
 import Stack from "@mui/material/Stack";
 import { type FC, memo, useCallback, useMemo, useState } from "react";
-import { MathBlock } from "./data-display/MathBlock";
+import { MathBlock } from "./MathBlock";
 
 export const StatItem: FC<{
   label: string;
@@ -49,7 +49,7 @@ export const StatItem: FC<{
             sx={{
               minWidth: 0,
               userSelect: "none",
-              "&:hover": {
+              ":hover": {
                 textDecorationLine: "underline",
               },
             }}

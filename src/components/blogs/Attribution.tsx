@@ -1,16 +1,15 @@
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { type FC, memo } from "react";
-import { notebookHeadingSx } from "@/theme";
+import { NotebookHeading } from "@/components/NotebookHeading";
+import { NotebookHeadingHighlight } from "@/components/NotebookHeadingHighlight";
 
 export const Attribution: FC = memo(() => {
   return (
     <Stack spacing={1.5}>
-      <Typography variant="h5" component="h2" sx={notebookHeadingSx}>
-        <Typography component="span" variant="inherit">
-          {`ข้อมูลเว็ปไซต์`}
-        </Typography>
-      </Typography>
+      <NotebookHeading variant="h5" component="h2">
+        <NotebookHeadingHighlight>ข้อมูลเว็ปไซต์</NotebookHeadingHighlight>
+      </NotebookHeading>
       <Typography>
         {`เว็ปไซต์จัดทำให้เป็นสื่อการสอนกลุ่มสาระการรู้เรียนคณิตศาสตร์ โรงเรียนอยุธยาวิทยาลัย`}
       </Typography>

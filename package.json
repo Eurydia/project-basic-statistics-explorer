@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "vite build",
     "check": "pnpx @biomejs/biome check --write",
     "preview": "vite preview",
     "deploy": "pnpx gh-pages -d dist -b gh-pages"

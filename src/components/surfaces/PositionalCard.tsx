@@ -1,9 +1,11 @@
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { type FC, memo, useMemo } from "react";
+import { NotebookHeading } from "@/components/NotebookHeading";
+import { NotebookHeadingHighlight } from "@/components/NotebookHeadingHighlight";
+import { NotebookPaperDecorations } from "@/components/NotebookPaperDecorations";
+import { NotebookPaper } from "@/components/surfaces/NotebookPaper";
 import { getQuantile } from "@/core/services/make-quantile-item.helper";
-import { notebookHeadingSx, notebookSurfaceSx } from "@/theme";
 import { BoxPlot } from "../data-display/BoxPlot";
 import { DatasetOutlierDisplayBlock } from "../data-display/positional/DatasetOutlierDisplayBlock";
 import { DatasetPercentileDisplayBlock } from "../data-display/positional/DatasetPercentileDisplayBlock";
@@ -43,17 +45,18 @@ export const PositionalCard: FC<{
   }, [orderedDataset]);
 
   return (
-    <Paper
+    <NotebookPaper
       component="section"
       elevation={4}
-      sx={[notebookSurfaceSx, { padding: { xs: 2.5, md: 3 } }]}
+      sx={{ padding: { xs: 2.5, md: 3 } }}
     >
+      <NotebookPaperDecorations />
       <Stack spacing={1.75}>
-        <Typography component="h2" variant="h5" sx={notebookHeadingSx}>
-          <Typography component="span" variant="inherit">
-            {`ค่าวัดตำแหน่งของข้อมูล`}
-          </Typography>
-        </Typography>
+        <NotebookHeading component="h2" variant="h5">
+          <NotebookHeadingHighlight>
+            ค่าวัดตำแหน่งของข้อมูล
+          </NotebookHeadingHighlight>
+        </NotebookHeading>
         <DatasetQ1DisplayBlock
           orderedDataset={orderedDataset}
           fromPopulation={fromPopulation}
@@ -82,6 +85,6 @@ export const PositionalCard: FC<{
           <BoxPlot data={plotData} />
         </Paper>
       </Stack>
-    </Paper>
+    </NotebookPaper>
   );
 });
