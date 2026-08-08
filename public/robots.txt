@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://eurydia.github.io/project-basic-statistics-explorer/sitemap.xml
+Sitemap: https://statviz.eurydia.work/sitemap.xml

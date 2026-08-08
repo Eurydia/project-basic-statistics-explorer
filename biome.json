@@ -11,9 +11,11 @@
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
-    "indentWidth": 2
+    "indentWidth": 2,
+    "includes": ["./src"]
   },
   "linter": {
+    "includes": ["./src"],
     "enabled": true,
     "rules": {
       "preset": "recommended",
