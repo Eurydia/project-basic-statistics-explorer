@@ -1,11 +1,7 @@
-import CssBaseline from "@mui/material/CssBaseline";
-import { ThemeProvider } from "@mui/material/styles";
-import { MathJaxContext } from "better-react-mathjax";
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
-import { App } from "./App";
 import "./libs/chart/init";
-import { theme } from "./theme";
+import { App } from "./app/App";
 
 const root = document.getElementById("root");
 
@@ -14,21 +10,6 @@ if (root === null) {
 }
 createRoot(root).render(
   <StrictMode>
-    <MathJaxContext
-      renderMode="post"
-      hideUntilTypeset="every"
-      config={{
-        loader: ["input/tex", "output/svg"],
-        tex: {
-          inlineMath: [["$", "$"]],
-          displayMath: [["$$", "$$"]],
-        },
-      }}
-    >
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <App />
-      </ThemeProvider>
-    </MathJaxContext>
+    <App />
   </StrictMode>,
 );
